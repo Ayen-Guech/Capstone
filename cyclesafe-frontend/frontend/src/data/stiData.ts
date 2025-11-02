@@ -12,21 +12,14 @@ export const stiData: STIData[] = [
     name: "HIV / AIDS",
     description:
       "A viral infection that weakens the immune system. Regular testing, PrEP, and ART treatments are key to prevention and management.",
-    moreInfo: "https://www.who.int/news-room/fact-sheets/detail/hiv-aids",
-  },
-  {
-    id: 2,
-    name: "Chlamydia",
-    description:
-      "A common bacterial infection, often asymptomatic but can lead to infertility if untreated. Easily cured with antibiotics.",
-    moreInfo: "https://www.cdc.gov/std/chlamydia/stdfact-chlamydia.htm",
+    moreInfo: "https://www.kff.org/global-health-policy/the-global-hiv-aids-epidemic/",
   },
   {
     id: 3,
     name: "Gonorrhea",
     description:
       "A bacterial infection transmitted through sexual contact. Some strains are antibiotic resistant, so prompt treatment is vital.",
-    moreInfo: "https://www.mayoclinic.org/diseases-conditions/gonorrhea/symptoms-causes/syc-20351774",
+    moreInfo: "https://www.nhs.uk/conditions/gonorrhoea/",
   },
   {
     id: 4,
@@ -40,7 +33,7 @@ export const stiData: STIData[] = [
     name: "HPV",
     description:
       "The most common viral STI. Certain strains can cause cancer — vaccination and regular screening are recommended.",
-    moreInfo: "https://www.who.int/news-room/fact-sheets/detail/human-papillomavirus-(hpv)-and-cervical-cancer",
+    moreInfo: "https://youtu.be/sSp5JmzA1s0",
   },
   {
     id: 6,
@@ -54,7 +47,7 @@ export const stiData: STIData[] = [
     name: "Trichomoniasis",
     description:
       "A curable infection caused by a parasite. Common but often asymptomatic — testing and treatment are simple and effective.",
-    moreInfo: "https://www.who.int/news-room/fact-sheets/detail/trichomoniasis",
+    moreInfo: "https://www.cdc.gov/std/trichomonas/stdfact-trichomoniasis.htm",
   },
   {
     id: 8,

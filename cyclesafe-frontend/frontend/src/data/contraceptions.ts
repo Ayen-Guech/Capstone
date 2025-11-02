@@ -6,7 +6,7 @@ export const contraceptions: ContraceptionType[] = [
     name: "Birth Control Pills",
     description: "Daily pills that prevent ovulation and regulate hormones.",
     image: "/Pills.jpeg",
-    moreInfo: "https://www.plannedparenthood.org/learn/birth-control/birth-control-pill",
+    moreInfo: "https://youtu.be/7-7ZgVpUQWM",
     pros: ["Highly effective", "Regulates periods", "Reduces acne"],
     cons: ["Must be taken daily", "May cause nausea or weight change"],
   },
@@ -24,7 +24,7 @@ export const contraceptions: ContraceptionType[] = [
     name: "Condoms",
     description: "Barrier method that prevents sperm from reaching the egg.",
     image: "/condom.jpeg",
-    moreInfo: "https://www.unaids.org/en/resources/fact-sheet",
+    moreInfo: "https://youtu.be/hNcDm37yj5Q",
     pros: ["Prevents STIs", "Easily accessible", "No hormones"],
     cons: ["Can break or slip", "May reduce sensitivity"],
   },
@@ -33,7 +33,7 @@ export const contraceptions: ContraceptionType[] = [
     name: "Contraceptive Implant",
     description: "A small rod placed under the skin that releases hormones to prevent pregnancy.",
     image: "/Implant.jpeg",
-    moreInfo: "https://www.plannedparenthood.org/learn/birth-control/implant",
+    moreInfo: "https://www.kff.org/womens-health-policy/contraceptive-experiences-coverage-and-preferences-findings-from-the-2024-kff-womens-health-survey/",
     pros: ["Long-term protection", "Highly effective", "No daily action required"],
     cons: ["Requires a healthcare provider for insertion", "May cause irregular bleeding"],
   },
@@ -69,7 +69,7 @@ export const contraceptions: ContraceptionType[] = [
     name: "Emergency Contraception",
     description: "Pills taken after unprotected sex to prevent pregnancy.",
     image: "/Emergency.png",
-    moreInfo: "https://www.who.int/news-room/fact-sheets/detail/emergency-contraception",
+    moreInfo: "https://www.kff.org/womens-health-policy/emergency-contraception/",
     pros: ["Can be used after unprotected sex", "Available over-the-counter in many places"],
     cons: ["Less effective than regular contraception", "May cause nausea or vomiting"],
   },
@@ -78,7 +78,7 @@ export const contraceptions: ContraceptionType[] = [
     name: "Sterilization",
     description: "Permanent surgical procedure to prevent pregnancy.",
     image: "/Sterilization.jpeg",
-    moreInfo: "https://www.plannedparenthood.org/learn/birth-control/sterilization",
+    moreInfo: "https://www.kff.org/womens-health-policy/sterilization-or-permanent-contraception-as-a-family-planning-method/",
     pros: ["Permanent solution", "Highly effective"],
     cons: ["Irreversible", "Requires surgery"],
   },
@@ -118,22 +118,5 @@ export const contraceptions: ContraceptionType[] = [
     pros: ["Easy to use", "No prescription required"],
     cons: ["Less effective alone", "May cause irritation"],
   },
-  {
-  id: 14,
-  name: "Global HIV Knowledge Indicator (Ages 15–24)",
-  description:
-    "Percentage of young people aged 15–24 who correctly identify two ways to prevent HIV and reject three common misconceptions about HIV transmission.",
-  image: "/WorldBankHIVData.jpeg", // 🖼️ add any relevant background image to /public
-  moreInfo: "https://www.who.int/news-room/fact-sheets/detail/sexually-transmitted-infections-(stis)",
-  pros: [
-    "Official open data from The World Bank",
-    "Global coverage with country-specific breakdowns",
-    "Regularly updated using WHO and UNAIDS verified data",
-  ],
-  cons: [
-    "Requires internet access to load visualizations",
-    "May not provide region-specific program context",
-  ],
-},
 
 ];
