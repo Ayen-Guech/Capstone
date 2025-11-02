@@ -179,3 +179,15 @@ STATICFILES_DIRS = [
 ]
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "cyclesafe.onrender.com",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://cyclesafe.onrender.com",
+]
+
