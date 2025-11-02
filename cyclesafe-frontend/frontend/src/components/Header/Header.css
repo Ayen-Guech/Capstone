@@ -1,32 +1,85 @@
-/* Navbar background color */
-.navbar {
-  background-color: #6A0D25 !important; /* dark maroon */
-  position: fixed; /* stays fixed at the top */
+/* ==========================
+   NAVBAR BASE STYLING
+========================== */
+.custom-navbar {
+  background-color: #6A0D25 !important;
+  position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
+  z-index: 1050;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0; /* no side padding */
+}
+
+/* Remove default Bootstrap padding inside Container */
+.no-padding-container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   width: 100%;
-  z-index: 1050; /* keeps navbar above all other content */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* optional: floating effect */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Prevent content from being hidden behind navbar */
-body {
-  padding-top: 70px; /* adjust this based on navbar height */
-}
-
-/* Brand text */
-.navbar-brand {
-  color: #ffffff !important;
+/* ==========================
+   LOGO ALIGNMENT
+========================== */
+.brand-click {
+  font-size: 1.6rem;
   font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: 0.5px;
+  color: #fff !important;
+  margin-left: 0; /* flush with left edge */
+  padding-left: 1rem; /* small breathing space */
 }
 
-.navbar-brand:hover {
-  color: #E05A54 !important; /* primary red */
+.brand-click:hover {
+  color: #E05A54 !important;
 }
 
-/* Nav links */
+/* ==========================
+   CUSTOM TOGGLER
+========================== */
+.custom-toggler {
+  background-color: #ff4b8b !important;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+  margin-right: 1rem; /* flush to right with tiny gap */
+}
+
+.custom-toggler-icon {
+  background-image: none !important;
+  width: 24px;
+  height: 2px;
+  background-color: white;
+  position: relative;
+  display: inline-block;
+}
+
+.custom-toggler-icon::before,
+.custom-toggler-icon::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: white;
+  left: 0;
+}
+
+.custom-toggler-icon::before {
+  top: -7px;
+}
+
+.custom-toggler-icon::after {
+  top: 7px;
+}
+
+/* ==========================
+   LINKS & DROPDOWN
+========================== */
 .nav-link {
   color: #ffffff !important;
   font-weight: 500;
@@ -35,25 +88,77 @@ body {
 }
 
 .nav-link:hover {
-  color: #E05A54 !important; /* primary red */
+  color: #E05A54 !important;
 }
 
-/* Dropdown menu */
 .dropdown-menu {
-  background-color: #000000; /* black background */
+  background-color: #000;
   border: none;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-/* Dropdown items */
 .dropdown-item {
-  color: #ffffff; /* white text for contrast */
-  font-weight: 500;
-  transition: background-color 0.3s ease;
+  color: #fff;
 }
 
 .dropdown-item:hover {
-  background-color: #E05A54; /* red highlight */
-  color: #ffffff;
+  background-color: #E05A54;
+}
+
+/* ==========================
+/* ==========================
+   THEME TOGGLE BUTTON (FIXED ALIGNMENT)
+========================== */
+.theme-toggle-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 0.4rem 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #E05A54;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem; /* ✅ adds breathing space from right edge */
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-btn.light-mode {
+  background-color: #E05A54;
+}
+
+.theme-toggle-btn.dark-mode {
+  background-color: #ff4b8b;
+}
+
+/* Add a slight hover polish */
+.theme-toggle-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+/* ==========================
+   RESPONSIVE FIXES
+========================== */
+@media (max-width: 992px) {
+  .custom-navbar {
+    padding: 0.5rem 0;
+  }
+
+  .custom-toggler {
+    margin-right: 1rem;
+  }
+
+  .brand-click {
+    padding-left: 1rem;
+  }
+
+  .navbar-collapse {
+    background-color: #6A0D25;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .nav-link {
+    margin: 0.5rem 0;
+  }
 }

@@ -1,24 +1,84 @@
-# Logs
-logs
+# ==========================================
+# 🌿 ENVIRONMENT CONFIGURATION FILES
+# ==========================================
+# Ignore all .env files across all directories
+*.env
+.env
+.env.*
+**/.env
+**/.env.*
+# Example: 
+# - .env
+# - .env.local
+# - .env.production
+# - .env.development
+# - cyclesafe_backend/.env
+# - cyclesafe-backend/.env.production
+# - backend/.env.staging
+# ==========================================
+
+
+# ==========================================
+# 🐍 PYTHON / DJANGO
+# ==========================================
+*.pyc
+__pycache__/
+db.sqlite3
+venv/
+env/
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
 *.log
+*.db
+
+# Django static and media
+staticfiles/
+media/
+*.sqlite3
+
+
+# ==========================================
+# ⚛️ REACT / VITE FRONTEND
+# ==========================================
+node_modules/
+dist/
+build/
+.cache/
+.vite/
+coverage/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+*.tsbuildinfo
 
-node_modules
-dist
-dist-ssr
-*.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# ==========================================
+# 🧱 EDITOR / OS FILES
+# ==========================================
+.vscode/
+.idea/
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+*.swp
+*.swo
+
+
+# ==========================================
+# 🐳 DOCKER / DEVOPS
+# ==========================================
+*.pid
+*.seed
+*.bak
+docker-compose.override.yml
+
+
+# ==========================================
+# 🧪 TEST / CI FILES
+# ==========================================
+.pytest_cache/
+coverage.xml
+nosetests.xml
+junit.xml

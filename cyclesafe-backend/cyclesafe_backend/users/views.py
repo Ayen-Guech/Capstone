@@ -8,6 +8,8 @@ from .serializers import RegisterSerializer
 from .models import UserProfile
 
 # ✅ Registration
+
+# ✅ Registration
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = [AllowAny]

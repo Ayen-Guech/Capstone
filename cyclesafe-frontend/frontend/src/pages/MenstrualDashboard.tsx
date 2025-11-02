@@ -16,7 +16,7 @@ const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/api/search/";
 
 const MenstrualDashboard: React.FC = () => {
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<never[]>([]);
   const [summary, setSummary] = useState<string>("");
   const [query, setQuery] = useState("menstrual health");
   const [loading, setLoading] = useState(false);
@@ -134,7 +134,7 @@ const MenstrualDashboard: React.FC = () => {
           <Card.Title
             style={{ color: "#c2185b", fontWeight: "600", fontSize: "1.25rem" }}
           >
-            AI Summary
+          Summary
           </Card.Title>
           <Card.Text style={{ color: "#444", lineHeight: 1.7 }}>
             {summary}

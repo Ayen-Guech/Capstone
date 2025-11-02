@@ -5,91 +5,111 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { ThemeContext } from "../../context/ThemeContext";
+import AuthPage from "../../pages/LoginPage";
 
 interface HeaderProps {
-  onLoginClick: () => void;
-  onNavigate: (section: string) => void; // navigation prop
+  onNavigate: (section: string) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onLoginClick, onNavigate }) => {
+const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const [expanded, setExpanded] = useState(false); // state to track toggle open/close
+  const [expanded, setExpanded] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
 
   const handleNavClick = (section: string) => {
     onNavigate(section);
-    setExpanded(false); // close the menu when link clicked
+    setExpanded(false);
+  };
+
+  const handleLoginClick = () => {
+    setExpanded(false);
+    setShowAuth(true);
   };
 
   return (
-    <Navbar
-      expand="lg"
-      expanded={expanded}
-      onToggle={setExpanded}
-      className={`shadow-sm ${
-        theme === "dark" ? "navbar-dark bg-dark" : "navbar-light bg-light"
-      }`}
-      fixed="top"
-    >
-      <Container>
-        <Navbar.Brand
-          onClick={() => handleNavClick("home")}
-          className="fw-bold text-white"
-          style={{ cursor: "pointer" }}
-        >
-          CycleSafe
-        </Navbar.Brand>
+    <>
+      <Navbar
+        expand="lg"
+        expanded={expanded}
+        onToggle={setExpanded}
+        fixed="top"
+        className={`custom-navbar ${
+          theme === "dark" ? "navbar-dark" : "navbar-light"
+        }`}
+      >
+        {/* ⚡ Remove inner Bootstrap padding completely */}
+        <Container fluid className="no-padding-container">
+          {/* ✅ Brand flush left */}
+          <Navbar.Brand
+            onClick={() => handleNavClick("home")}
+            className="fw-bold text-white brand-click"
+          >
+            CycleSafe
+          </Navbar.Brand>
 
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          onClick={() => setExpanded(expanded ? false : true)}
-        />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto align-items-center">
-            <Nav.Link onClick={() => handleNavClick("home")}>Home</Nav.Link>
-            <Nav.Link onClick={() => handleNavClick("about")}>About</Nav.Link>
-            <Nav.Link onClick={() => { onLoginClick(); setExpanded(false); }}>Login</Nav.Link>
-            <Nav.Link onClick={() => handleNavClick("chatbot")}>Chatbot</Nav.Link>
+          {/* ✅ Toggle flush right with pink square style */}
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            onClick={() => setExpanded(expanded ? false : true)}
+            className="custom-toggler"
+          >
+            <span className="custom-toggler-icon"></span>
+          </Navbar.Toggle>
 
-            {/* 🩸 Resources Dropdown */}
-            <NavDropdown title="Resources" id="resources-dropdown">
-              <NavDropdown.Item onClick={() => handleNavClick("menstrual")}>
-                Menstrual Health
-              </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => handleNavClick("contraception")}>
-                Contraceptive Info
-              </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => handleNavClick("sti")}>
-                STI Information
-              </NavDropdown.Item>
-            </NavDropdown>
+          <Navbar.Collapse
+            id="basic-navbar-nav"
+            className="justify-content-end text-center"
+          >
+            <Nav className="align-items-center">
+              <Nav.Link onClick={() => handleNavClick("home")}>Home</Nav.Link>
+              <Nav.Link onClick={() => handleNavClick("about")}>About</Nav.Link>
+              <Nav.Link onClick={handleLoginClick}>Login</Nav.Link>
+              <Nav.Link onClick={() => handleNavClick("chatbot")}>
+                Chatbot
+              </Nav.Link>
 
-            {/* 🔗 Links Dropdown */}
-            <NavDropdown title="Links" id="links-dropdown">
-              <NavDropdown.Item onClick={() => handleNavClick("blog")}>
+              <NavDropdown title="Resources" id="resources-dropdown">
+                <NavDropdown.Item
+                  onClick={() => handleNavClick("menstrual")}
+                >
+                  Menstrual Health
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={() => handleNavClick("contraception")}
+                >
+                  Contraceptive Info
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleNavClick("sti")}>
+                  STI Information
+                </NavDropdown.Item>
+              </NavDropdown>
+
+              <Nav.Link onClick={() => handleNavClick("blog")}>
                 Blog
-              </NavDropdown.Item>
-            </NavDropdown>
+              </Nav.Link>
 
-            <Nav.Link onClick={() => handleNavClick("donation")}>
-              Donation
-            </Nav.Link>
+              <Nav.Link onClick={() => handleNavClick("donation")}>
+                Donation
+              </Nav.Link>
 
-            {/* 🌓 Theme toggle */}
-            <button
-              onClick={() => {
-                toggleTheme();
-                setExpanded(false); // close menu when toggling theme
-              }}
-              className={`btn btn-sm ms-3 ${
-                theme === "light" ? "btn-outline-dark" : "btn-outline-light"
-              }`}
-            >
-              {theme === "light" ? "🌙 Dark" : "☀️ Light"}
-            </button>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+              <button
+                onClick={() => {
+                  toggleTheme();
+                  setExpanded(false);
+                }}
+                className={`theme-toggle-btn ${
+                  theme === "light" ? "light-mode" : "dark-mode"
+                }`}
+              >
+                {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+              </button>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+      {showAuth && <AuthPage onClose={() => setShowAuth(false)} />}
+    </>
   );
 };
 

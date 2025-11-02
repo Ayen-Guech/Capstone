@@ -1,17 +1,25 @@
+/* ==========================
+   🏠 HOME BASE STYLES
+   ========================== */
 .home-container {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 0; /* Removes the gap under header */
+  padding: 0;
   background-color: black;
   color: white;
+  width: 100%;
+  overflow: hidden;
 }
 
-/* Make carousel images consistent */
+/* ✅ Carousel images — full viewport height */
 .carousel-img {
-  height: 90vh;
+  height: 100vh; /* full screen height */
+  width: 100%;
   object-fit: cover;
+  margin: 0;
+  padding: 0;
 }
 
-/* Caption box styling */
+/* ✅ Caption box styling */
 .carousel-caption {
   right: 5%;
   left: auto;
@@ -48,9 +56,9 @@
 
 /* Highlight "Kakuma" specifically */
 .highlight-kakuma {
-  font-weight: 800;         /* bold */
-  font-size: 1.3rem;        /* slightly larger than paragraph */
-  color: #FF69B4;           /* pink accent */
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: #FF69B4;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
   transition: transform 0.3s ease, color 0.3s ease;
 }
@@ -61,15 +69,34 @@
   color: #E05A54;
 }
 
-/* ✅ Responsive for smaller screens */
-@media (max-width: 768px) {
+/* ==========================
+   📱 RESPONSIVE DESIGN
+   ========================== */
+@media (max-width: 992px) {
+  .carousel-img {
+    height: 80vh; /* slightly smaller for tablets */
+  }
+
   .carousel-caption {
     right: 0;
     left: 0;
+    bottom: 12%;
+    text-align: center;
+    max-width: 85%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-img {
+    height: 70vh; /* smaller for mobile */
+  }
+
+  .carousel-caption {
     bottom: 10%;
+    padding: 15px;
     text-align: center;
     max-width: 90%;
-    margin: 0 auto;
   }
 
   .carousel-caption h5 {

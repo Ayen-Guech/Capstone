@@ -1,0 +1,69 @@
+# ===========================
+# 🐍 PYTHON / DJANGO
+# ===========================
+*.pyc
+__pycache__/
+db.sqlite3
+venv/
+env/
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.log
+
+# Django stuff
+staticfiles/
+media/
+*.sqlite3
+*.db
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# ===========================
+# ⚛️ REACT / VITE FRONTEND
+# ===========================
+node_modules/
+dist/
+build/
+.cache/
+.vite/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# ===========================
+# 🧱 EDITOR / OS FILES
+# ===========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ===========================
+# 🐳 DOCKER (if used)
+# ===========================
+docker-compose.override.yml
+*.pid
+*.seed
+*.bak
+
+# ===========================
+# 🚀 TEST / CI FILES
+# ===========================
+.pytest_cache/
+coverage.xml
+nosetests.xml
+junit.xml
