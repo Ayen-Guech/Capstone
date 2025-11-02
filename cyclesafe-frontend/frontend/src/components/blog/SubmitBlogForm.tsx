@@ -1,0 +1,105 @@
+import React, { useState } from "react";
+import axios from "axios";
+import styles from "./SubmitBlogForm.module.css";
+
+const SubmitBlogForm: React.FC = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    title: "",
+    content: "",
+    image: null as File | null,
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Handle text inputs
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle file input
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, image: e.target.files ? e.target.files[0] : null });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const data = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value) data.append(key, value as any);
+    });
+
+    try {
+      await axios.post("http://localhost:8000/api/blog/submit-post/", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      alert("Your blog has been submitted for review!");
+      setFormData({ name: "", email: "", title: "", content: "", image: null });
+    } catch (error) {
+      console.error(error);
+      alert("There was an error submitting your blog.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className={styles.container}>
+      <h2>Share Your Story</h2>
+      <p className={styles.subtitle}>
+        Share your knowledge, tips, or personal experience. Once approved by the CycleSafe team,
+        your story will appear in our blog section.
+      </p>
+
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="text"
+          name="title"
+          placeholder="Blog Title"
+          value={formData.title}
+          onChange={handleChange}
+          required
+        />
+
+        <textarea
+          name="content"
+          placeholder="Write your story here..."
+          rows={6}
+          value={formData.content}
+          onChange={handleChange}
+          required
+        />
+
+        <input type="file" name="image" accept="image/*" onChange={handleFileChange} />
+
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Submitting..." : "Submit Blog"}
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default SubmitBlogForm;

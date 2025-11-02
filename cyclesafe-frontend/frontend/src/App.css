@@ -1,0 +1,274 @@
+/* ============================================
+   🌍 GLOBAL THEME & SPACING FRAMEWORK
+   ============================================ */
+
+:root {
+  /* 🌿 Spacing scale */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+
+  /* 🌸 Color palette */
+  --bg-color: #ffffff;
+  --text-color: #1c1c1c;
+  --muted-text: #444444;
+  --accent-color: #e05a54;
+  --heading-color: #6a0d25;
+  --card-bg: #fdf7f3;
+  --card-text: #2b2b2b;
+}
+
+/* 🌙 Dark Mode */
+body[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: #f5f5f5;
+  --muted-text: #d0d0d0;
+  --accent-color: #ff7b73;
+  --heading-color: #ffb0a9;
+  --card-bg: #1e1e1e;
+  --card-text: #f1f1f1;
+}
+
+/* Global Reset */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.6;
+}
+
+/* ===========================
+   🌿 GLOBAL SECTION STYLING
+   =========================== */
+section,
+.section,
+.about-section {
+  padding: var(--space-xl) var(--space-md);
+  margin-bottom: var(--space-xl);
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  section,
+  .section,
+  .about-section {
+    padding: var(--space-lg) var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+}
+
+/* ===========================
+   🧭 SPACING UTILITIES
+   =========================== */
+.mt-sm { margin-top: var(--space-sm); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mb-md { margin-bottom: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.px-md { padding-left: var(--space-md); padding-right: var(--space-md); }
+.py-md { padding-top: var(--space-md); padding-bottom: var(--space-md); }
+.pt-lg { padding-top: var(--space-lg); }
+.pb-lg { padding-bottom: var(--space-lg); }
+
+/* ===========================
+   HEADER / HERO
+   =========================== */
+.App-header {
+  background: linear-gradient(135deg, #6A0D25, #E05A54);
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #fff;
+  padding: var(--space-2xl) var(--space-md);
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  line-height: 1.2;
+  transition: all 0.3s ease-in-out;
+}
+
+.App-header p {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  margin-top: var(--space-sm);
+  font-weight: 400;
+  max-width: 700px;
+}
+
+/* Header link */
+.App-link {
+  color: #FFD2C5;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: var(--space-sm);
+  transition: all 0.3s ease;
+}
+
+.App-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Logo animation */
+.App-logo {
+  height: 25vmin;
+  max-height: 180px;
+  pointer-events: none;
+  display: block;
+  margin: var(--space-sm) auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo:hover {
+    animation: App-logo-spin 10s linear infinite;
+  }
+}
+
+/* ===========================
+   BUTTONS
+   =========================== */
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: var(--space-sm);
+}
+
+button:hover {
+  background-color: #C22E39;
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   CARDS (Global)
+   =========================== */
+.card,
+.contraception-card,
+.sti-card,
+.about-card {
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  padding: var(--space-md);
+  margin: var(--space-sm);
+}
+
+.card:hover,
+.contraception-card:hover,
+.sti-card:hover,
+.about-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ===========================
+   TEXT & HEADINGS
+   =========================== */
+h1, h2, h3, h4 {
+  color: var(--heading-color);
+  margin-bottom: var(--space-sm);
+}
+
+p {
+  color: var(--muted-text);
+  margin-bottom: var(--space-sm);
+}
+
+.section-title {
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: var(--space-md);
+}
+
+/* ===========================
+   FOOTER
+   =========================== */
+.App-footer {
+  background-color: #6A0D25;
+  color: #fff;
+  text-align: center;
+  padding: var(--space-md);
+  font-size: 0.9rem;
+  margin-top: var(--space-2xl);
+}
+
+/* ===========================
+   RESPONSIVE ADJUSTMENTS
+   =========================== */
+@media (max-width: 768px) {
+  .App-header {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    padding: var(--space-xl) var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .App-header {
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
+    padding: var(--space-lg) var(--space-xs);
+  }
+}
+
+/* ===========================
+   KEYFRAMES
+   =========================== */
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   ✨ SEAMLESS PAGE TRANSITION FIX
+   (Removes visible lines between pages)
+   ============================================ */
+main, section, .App-header, .App-footer {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0;
+}
+
+/* Ensure seamless joins between pages */
+section + section,
+.App-header + section,
+section + .App-footer {
+  border-top: none !important;
+  margin-top: 0 !important;
+}
+
+/* Match backgrounds exactly */
+html, body {
+  background-color: var(--bg-color);
+  border: none !important;
+  outline: none !important;
+}
+
+/* Subtle optional blend between pages */
+section + section::before {
+  content: "";
+  display: block;
+  height: 8px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.03), transparent);
+}

@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto&display=swap");
+
+.chatbot-page {
+  padding: 2rem;
+  background-color: #fff5f5;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+  color: #4a4a4a;
+}
+
+.title {
+  font-family: "Poppins", sans-serif;
+  color: #e75480;
+  font-size: 2rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.chatbot-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatbot-left {
+  max-width: 50%;
+}
+
+.chatbot-right {
+  position: relative;
+}
+
+.chatbot-right img {
+  max-width: 250px;
+}
+
+.speech-bubble {
+  position: absolute;
+  top: 10%;
+  right: -50px;
+  background: #ffb6c1;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+}
+
+.prediction-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.prediction-boxes {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.prediction-item {
+  text-align: center;
+  flex: 1;
+  margin: 0 10px;
+  background: #ffeef3;
+  border-radius: 8px;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.prediction-item:hover {
+  background: #ffd6e0;
+}
+
+.prediction-item .icon {
+  font-size: 24px;
+  display: block;
+  margin-bottom: 5px;
+  color: #e75480;
+}

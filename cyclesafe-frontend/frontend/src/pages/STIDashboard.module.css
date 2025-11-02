@@ -1,0 +1,294 @@
+/* ===========================
+   Dashboard container
+   =========================== */
+.dashboard {
+  margin-top: 80px; /* offset for fixed header */
+  color: var(--text-color, #333);
+  min-height: 100vh;
+  background-color: var(--bg-color, #f9f9f9);
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===========================
+   Hero Section (Adaptive & Auto Height)
+   =========================== */
+.heroSection {
+  position: relative;
+  background-image: url("/Creatingawarness.jpg");
+  background-repeat: no-repeat;
+  background-size: cover; /* ✅ fills container, no black bars */
+  background-position: center top; /* ✅ focuses on people’s faces */
+  background-color: #000; /* ✅ smooth fallback for any gaps */
+  min-height: 70vh; /* ✅ enough initial height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: background-position 0.4s ease-in-out, background-size 0.4s ease-in-out;
+}
+
+/* Dark overlay on image for readability */
+.heroSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* ===========================
+   Overlay Content
+   =========================== */
+.overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 850px;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  backdrop-filter: blur(4px);
+  box-sizing: border-box;
+}
+
+.overlay::-webkit-scrollbar {
+  width: 6px;
+}
+.overlay::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+}
+
+.overlay h1 {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  line-height: 1.2;
+  word-wrap: break-word;
+}
+
+.overlay p {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  line-height: 1.5;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  margin: 0;
+  word-wrap: break-word;
+}
+
+/* ===========================
+   Light Mode Adjustments
+   =========================== */
+body.light-mode .overlay {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+body.light-mode .overlay h1,
+body.light-mode .overlay p {
+  color: #111;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.6);
+}
+
+/* ===========================
+   Cards Section
+   =========================== */
+.cardsSection {
+  padding: 3rem 1.5rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.05),
+    rgba(0, 0, 0, 0.05)
+  );
+}
+
+.grid {
+  display: grid;
+  gap: 1.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+}
+
+/* ===========================
+   Card Styling (STI / Contraception)
+   =========================== */
+.sti-card,
+.contraception-card {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sti-card:hover,
+.contraception-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #6A0D25;
+  line-height: 1.3;
+}
+
+.card-text {
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  color: #555;
+  line-height: 1.5;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.button {
+  background-color: #E05A54;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: center;
+}
+
+.button:hover {
+  background-color: #C22E39;
+  transform: scale(1.05);
+}
+
+/* ===========================
+   Authentication Modal
+   =========================== */
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.auth-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 420px;
+  max-width: 90%;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.btn-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* ===========================
+   Footer
+   =========================== */
+.App-footer {
+  background-color: #6A0D25;
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+  margin-top: 3rem;
+}
+
+/* ===========================
+   Responsive Adjustments
+   =========================== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .heroSection {
+    background-size: cover;
+    background-position: center 10%; /* ✅ shift slightly upward */
+    min-height: 70vh;
+  }
+}
+
+/* Mobile Screens */
+@media (max-width: 768px) {
+  .heroSection {
+    background-size: cover; /* ✅ maintain full cover */
+    background-position: center 15%; /* ✅ focus upper area */
+    padding: 2rem 1rem;
+    min-height: auto; /* ✅ auto-adjust based on text */
+  }
+
+  .overlay {
+    padding: 1.25rem;
+    width: 95%;
+    max-width: 90%;
+    max-height: none;
+  }
+
+  .overlay h1 {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+  }
+
+  .overlay p {
+    font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+  }
+
+  .sti-card,
+  .contraception-card {
+    height: auto;
+  }
+}
+
+/* Small Phones */
+@media (max-width: 480px) {
+  .heroSection {
+    background-size: cover;
+    background-position: center 18%; /* ✅ more focus on faces */
+    padding: 1.5rem 0.75rem;
+    min-height: auto;
+  }
+
+  .overlay {
+    padding: 1rem;
+    width: 95%;
+    border-radius: 12px;
+  }
+
+  .overlay h1 {
+    font-size: clamp(1.2rem, 4.5vw, 1.8rem);
+  }
+
+  .overlay p {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+  }
+}

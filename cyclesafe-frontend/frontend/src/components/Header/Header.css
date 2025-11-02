@@ -1,0 +1,59 @@
+/* Navbar background color */
+.navbar {
+  background-color: #6A0D25 !important; /* dark maroon */
+  position: fixed; /* stays fixed at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1050; /* keeps navbar above all other content */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* optional: floating effect */
+}
+
+/* Prevent content from being hidden behind navbar */
+body {
+  padding-top: 70px; /* adjust this based on navbar height */
+}
+
+/* Brand text */
+.navbar-brand {
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.navbar-brand:hover {
+  color: #E05A54 !important; /* primary red */
+}
+
+/* Nav links */
+.nav-link {
+  color: #ffffff !important;
+  font-weight: 500;
+  margin-right: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #E05A54 !important; /* primary red */
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  background-color: #000000; /* black background */
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Dropdown items */
+.dropdown-item {
+  color: #ffffff; /* white text for contrast */
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #E05A54; /* red highlight */
+  color: #ffffff;
+}

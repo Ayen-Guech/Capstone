@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* 🌸 Page Layout */
+.page {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* 🌷 Hero Section */
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 90%;
+  max-width: 1100px;
+  margin: 3rem auto;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+/* Shared card style */
+.infoCard,
+.chatCard {
+  flex: 1;
+  min-width: 320px;
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* LEFT SIDE */
+.mainTitle {
+  font-size: 2.6rem;
+  color: var(--heading-color);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.subText {
+  font-size: 1.1rem;
+  color: var(--muted-text);
+  margin-bottom: 1.5rem;
+}
+
+.chatIntro {
+  border-left: 5px solid var(--accent-color);
+  padding-left: 1.5rem;
+  font-size: 1rem;
+  color: var(--text-color);
+  line-height: 1.7;
+  transition: all 0.3s ease-in-out;
+}
+
+.chatIntro p {
+  margin-bottom: 0.8rem;
+}
+
+.chatIntro strong {
+  color: var(--accent-color);
+}
+
+/* RIGHT SIDE */
+.chatBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid var(--muted-text);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 8px rgba(194, 24, 91, 0.15);
+}
+
+.smsLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.sendBtn {
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 1.05rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.sendBtn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+/* ⚠️ Error Box */
+.errorBox {
+  background-color: rgba(255, 90, 90, 0.1);
+  color: var(--heading-color);
+  padding: 1rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 700px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-top: 1rem;
+}
+
+/* 🌺 Results Section */
+.resultsSection {
+  width: 90%;
+  max-width: 800px;
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin: 2rem 0;
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.resultHeader {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 0.5rem;
+}
+
+.resultSub {
+  color: var(--muted-text);
+  margin-bottom: 1.5rem;
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.resultCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  min-width: 220px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.icon {
+  font-size: 1.6rem;
+  color: var(--accent-color);
+}
+
+.cardLabel {
+  font-weight: 500;
+  color: var(--muted-text);
+}
+
+.cardValue {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+.cycleSummaryCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cycleLengthText {
+  text-align: center;
+  font-weight: 600;
+  color: var(--accent-color);
+  margin: 1rem 0;
+  font-size: 1rem;
+}
+
+.aiSummary {
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  line-height: 1.8;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  margin-top: 1rem;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.aiSummary h4 {
+  color: var(--accent-color);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.aiSummary p {
+  text-align: justify;
+  white-space: pre-line;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive */
+@media (max-width: 900px) {
+  .headerSection {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .infoCard,
+  .chatCard {
+    width: 100%;
+    padding: 1.8rem;
+  }
+
+  .chatIntro {
+    text-align: left;
+  }
+}

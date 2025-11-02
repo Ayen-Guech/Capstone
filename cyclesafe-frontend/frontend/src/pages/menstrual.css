@@ -1,0 +1,82 @@
+.menstrual-dashboard {
+  background: linear-gradient(180deg, #fff6f7, #fff);
+  padding: 4rem 2rem;
+  min-height: 100vh;
+}
+
+.section-title {
+  color: #c2185b;
+  font-weight: 800;
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: #555;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.menstrual-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.menstrual-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menstrual-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(194, 24, 91, 0.2);
+}
+
+.menstrual-card h4 {
+  color: #c2185b;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.menstrual-card p {
+  flex-grow: 1;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.menstrual-card-footer {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.menstrual-card .btn {
+  background-color: #c2185b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+}
+
+.menstrual-card .btn:hover {
+  opacity: 0.9;
+}
+
+.search-bar input {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 0.6rem;
+}
+
+@media (max-width: 768px) {
+  .search-bar input {
+    width: 100%;
+  }
+}
