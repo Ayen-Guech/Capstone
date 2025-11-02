@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
-
+import dj_database_url
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -17,19 +17,8 @@ DEBUG = os.getenv("DEBUG", "True") == "True"
 ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "localhost").split(",")]
 
 # Database
-DATABASES = {
-    "default": {
-        "ENGINE": os.getenv("DB_ENGINE", "django.db.backends.mysql"),
-        "NAME": os.getenv("DB_NAME", "cyclesafe_local"),
-        "USER": os.getenv("DB_USER", "root"),
-        "PASSWORD": os.getenv("DB_PASSWORD", ""),
-        "HOST": os.getenv("DB_HOST", "localhost"),
-        "PORT": os.getenv("DB_PORT", "3306"),
-        "OPTIONS": {
-            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
-    }
-}
+
+
 
 ALLOWED_PROXY_DOMAINS = [
     "plannedparenthood.org",
@@ -120,6 +109,23 @@ SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
+
+
+DATABASES = {
+    "default": {
+        "ENGINE": os.getenv("DB_ENGINE", "django.db.backends.mysql"),
+        "NAME": os.getenv("DB_NAME", "cyclesafe_local"),
+        "USER": os.getenv("DB_USER", "root"),
+        "PASSWORD": os.getenv("DB_PASSWORD", ""),
+        "HOST": os.getenv("DB_HOST", "localhost"),
+        "PORT": os.getenv("DB_PORT", "3306"),
+        "OPTIONS": {
+            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    }
+}
+
+DATABASES['default'] = dj_database_url.parse("postgresql://capstonedata_user:mfHAJVkYtvaLWzfWMxfrrexpNkVnmIvM@dpg-d43p3o6uk2gs739bpt4g-a.oregon-postgres.render.com/capstonedata", conn_max_age=600)
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -171,7 +177,5 @@ TEMPLATES[0]['DIRS'] = [
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR.parent.parent, 'cyclesafe-frontend', 'frontend', 'dist', 'assets'),
 ]
-
-
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
