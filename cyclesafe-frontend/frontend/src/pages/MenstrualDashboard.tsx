@@ -11,14 +11,17 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
-import type { SearchResult } from "../types/types"; // ✅ Import the shared type
- // ✅ Import the shared type
+import type { SearchResult } from "../types/types"; // ✅ Shared type
 
+// ✅ Dynamic backend base URL (Vercel + Local)
 const BACKEND_URL =
-  import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/api/search/";
+  import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
+
+// ✅ Log to confirm the actual backend being used
+console.log("🌍 Using backend:", `${BACKEND_URL}api/search/`);
 
 const MenstrualDashboard: React.FC = () => {
-  const [results, setResults] = useState<SearchResult[]>([]); // ✅ Correct type
+  const [results, setResults] = useState<SearchResult[]>([]);
   const [summary, setSummary] = useState<string>("");
   const [query, setQuery] = useState("menstrual health");
   const [loading, setLoading] = useState(false);
@@ -29,25 +32,27 @@ const MenstrualDashboard: React.FC = () => {
     title: string;
   } | null>(null);
 
-  // 🚸 Age confirmation check
+  // 🚸 Check if user has confirmed age
   const hasConfirmedAge = localStorage.getItem("isAdultConfirmed") === "true";
 
-  // 🔍 Fetch results from backend
+  // 🔍 Fetch menstrual health resources from backend
   const fetchResults = async () => {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(`${BACKEND_URL}?q=${encodeURIComponent(query)}`);
+      // ✅ Always point to /api/search/
+      const response = await fetch(
+        `${BACKEND_URL}api/search/?q=${encodeURIComponent(query)}`
+      );
+
       if (!response.ok) throw new Error(`Error: ${response.status}`);
       const data = await response.json();
+
       setSummary(data.summary || "");
-      setResults((data.results || []) as SearchResult[]); // ✅ Type assertion
+      setResults((data.results || []) as SearchResult[]);
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError(String(err));
-      }
+      if (err instanceof Error) setError(err.message);
+      else setError(String(err));
     } finally {
       setLoading(false);
     }
@@ -73,7 +78,7 @@ const MenstrualDashboard: React.FC = () => {
     }
   };
 
-  // ✅ Confirm age once
+  // ✅ Confirm age and open restricted article
   const handleConfirmAge = () => {
     if (selectedArticle) {
       localStorage.setItem("isAdultConfirmed", "true");
@@ -82,7 +87,7 @@ const MenstrualDashboard: React.FC = () => {
     setShowModal(false);
   };
 
-  // ❌ Cancel modal
+  // ❌ Cancel age confirmation modal
   const handleCancelAge = () => {
     setShowModal(false);
     setSelectedArticle(null);
@@ -121,7 +126,7 @@ const MenstrualDashboard: React.FC = () => {
         </Button>
       </div>
 
-      {/* Loading / Error States */}
+      {/* Loading / Error */}
       {loading && (
         <div className="text-center py-4">
           <Spinner animation="border" variant="danger" />
@@ -176,7 +181,6 @@ const MenstrualDashboard: React.FC = () => {
                     {item.snippet}
                   </Card.Text>
 
-                  {/* 🚫 Restricted Read More */}
                   <OverlayTrigger
                     placement="top"
                     overlay={
@@ -213,8 +217,7 @@ const MenstrualDashboard: React.FC = () => {
       {/* 😔 No results */}
       {!loading && !summary && results.length === 0 && (
         <p className="text-center mt-4" style={{ color: "var(--text-color)" }}>
-          No results yet. Try searching for “period hygiene” or “PMS
-          management”.
+          No results yet. Try searching for “period hygiene” or “PMS management”.
         </p>
       )}
 
