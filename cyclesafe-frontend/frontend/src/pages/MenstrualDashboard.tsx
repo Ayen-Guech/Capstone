@@ -11,12 +11,14 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
+import type { SearchResult } from "../types/types"; // ✅ Import the shared type
+ // ✅ Import the shared type
 
 const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/api/search/";
 
 const MenstrualDashboard: React.FC = () => {
-  const [results, setResults] = useState<never[]>([]);
+  const [results, setResults] = useState<SearchResult[]>([]); // ✅ Correct type
   const [summary, setSummary] = useState<string>("");
   const [query, setQuery] = useState("menstrual health");
   const [loading, setLoading] = useState(false);
@@ -35,22 +37,24 @@ const MenstrualDashboard: React.FC = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await fetch(
-        `${BACKEND_URL}?q=${encodeURIComponent(query)}`
-      );
+      const response = await fetch(`${BACKEND_URL}?q=${encodeURIComponent(query)}`);
       if (!response.ok) throw new Error(`Error: ${response.status}`);
       const data = await response.json();
       setSummary(data.summary || "");
-      setResults(data.results || []);
-    } catch (err: any) {
-      setError(err.message);
+      setResults((data.results || []) as SearchResult[]); // ✅ Type assertion
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError(String(err));
+      }
     } finally {
       setLoading(false);
     }
   };
 
   // 🧠 Handle “Read More” click
-  const handleReadMore = (item: any) => {
+  const handleReadMore = (item: SearchResult) => {
     const restrictedSources = [
       "World Health Organization",
       "World Bank Data",
@@ -134,7 +138,7 @@ const MenstrualDashboard: React.FC = () => {
           <Card.Title
             style={{ color: "#c2185b", fontWeight: "600", fontSize: "1.25rem" }}
           >
-          Summary
+            Summary
           </Card.Title>
           <Card.Text style={{ color: "#444", lineHeight: 1.7 }}>
             {summary}

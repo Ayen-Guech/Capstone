@@ -9,9 +9,10 @@ import AuthPage from "../../pages/LoginPage";
 
 interface HeaderProps {
   onNavigate: (section: string) => void;
+  onLoginClick?: () => void; // ✅ Added this line
 }
 
-const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
+const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [expanded, setExpanded] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
@@ -24,6 +25,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   const handleLoginClick = () => {
     setExpanded(false);
     setShowAuth(true);
+    if (onLoginClick) onLoginClick(); // ✅ optional callback if parent passes it
   };
 
   return (
@@ -37,9 +39,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
           theme === "dark" ? "navbar-dark" : "navbar-light"
         }`}
       >
-        {/* ⚡ Remove inner Bootstrap padding completely */}
         <Container fluid className="no-padding-container">
-          {/* ✅ Brand flush left */}
           <Navbar.Brand
             onClick={() => handleNavClick("home")}
             className="fw-bold text-white brand-click"
@@ -47,7 +47,6 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
             CycleSafe
           </Navbar.Brand>
 
-          {/* ✅ Toggle flush right with pink square style */}
           <Navbar.Toggle
             aria-controls="basic-navbar-nav"
             onClick={() => setExpanded(expanded ? false : true)}
@@ -69,14 +68,10 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
               </Nav.Link>
 
               <NavDropdown title="Resources" id="resources-dropdown">
-                <NavDropdown.Item
-                  onClick={() => handleNavClick("menstrual")}
-                >
+                <NavDropdown.Item onClick={() => handleNavClick("menstrual")}>
                   Menstrual Health
                 </NavDropdown.Item>
-                <NavDropdown.Item
-                  onClick={() => handleNavClick("contraception")}
-                >
+                <NavDropdown.Item onClick={() => handleNavClick("contraception")}>
                   Contraceptive Info
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={() => handleNavClick("sti")}>
@@ -84,13 +79,8 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                 </NavDropdown.Item>
               </NavDropdown>
 
-              <Nav.Link onClick={() => handleNavClick("blog")}>
-                Blog
-              </Nav.Link>
-
-              <Nav.Link onClick={() => handleNavClick("donation")}>
-                Donation
-              </Nav.Link>
+              <Nav.Link onClick={() => handleNavClick("blog")}>Blog</Nav.Link>
+              <Nav.Link onClick={() => handleNavClick("donation")}>Donation</Nav.Link>
 
               <button
                 onClick={() => {

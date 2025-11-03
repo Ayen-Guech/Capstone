@@ -7,3 +7,13 @@ export interface ContraceptionType {
   pros: string[];
   cons: string[];
 }
+
+
+
+export interface SearchResult {
+  source: string;
+  title: string;
+  snippet: string;
+  type?: string;
+  url: string;
+}
