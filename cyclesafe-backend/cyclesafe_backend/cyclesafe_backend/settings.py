@@ -10,7 +10,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ------------------------------------------
-# 🔐 Load .env file
+# 🔐 Load .env file (for local dev)
 # ------------------------------------------
 env_path = BASE_DIR / ".env"
 if env_path.exists():
@@ -26,12 +26,12 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "cyclesafe.onrender.com",
-    "cyclesafe-frontend.vercel.app",
+    "capstone-virid-nu.vercel.app",  # ✅ fixed domain name
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://cyclesafe.onrender.com",
-    "https://capstone-virid-nu.vercel.app/",
+    "https://capstone-virid-nu.vercel.app",  # ✅ removed trailing slash
 ]
 
 # ------------------------------------------
@@ -39,12 +39,12 @@ CSRF_TRUSTED_ORIGINS = [
 # ------------------------------------------
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "https://capstone-virid-nu.vercel.app/",
+    "https://capstone-virid-nu.vercel.app",
     "https://cyclesafe.onrender.com",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
-# Optional for development only:
+# Optional during debugging only:
 # CORS_ALLOW_ALL_ORIGINS = True
 
 # ------------------------------------------
@@ -141,7 +141,7 @@ DATABASES = {
 # 🌍 Internationalization
 # ------------------------------------------
 LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
+TIME_ZONE = "Africa/Nairobi"  # ✅ matches your local timezone
 USE_I18N = True
 USE_TZ = True
 
@@ -155,13 +155,21 @@ MEDIA_ROOT = BASE_DIR / "media"
 # ------------------------------------------
 # ⚙️ Celery & Redis
 # ------------------------------------------
-CELERY_BROKER_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
-CELERY_RESULT_BACKEND = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+
+CELERY_BROKER_URL = REDIS_URL
+CELERY_RESULT_BACKEND = REDIS_URL
 
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = "Africa/Nairobi"
+
+# ✅ Optional fallback in case Redis goes down (prevents total failure)
+if not REDIS_URL:
+    print("⚠️ No Redis URL found — using in-memory broker.")
+    CELERY_BROKER_URL = "memory://"
+    CELERY_RESULT_BACKEND = "cache+memory://"
 
 # ------------------------------------------
 # 🤖 External APIs
@@ -169,9 +177,8 @@ CELERY_TIMEZONE = "Africa/Nairobi"
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # ------------------------------------------
-# 🧩 React (optional for local dev only)
+# 🧩 React (for local dev only)
 # ------------------------------------------
-# These are only used if you serve React from Django (not in Render + Vercel)
 TEMPLATES[0]["DIRS"] = [
     os.path.join(BASE_DIR.parent.parent, "cyclesafe-frontend", "frontend", "dist")
 ]

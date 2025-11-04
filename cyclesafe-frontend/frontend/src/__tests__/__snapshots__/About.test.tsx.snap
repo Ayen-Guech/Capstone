@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`💡 About Component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="about-section light"
+    lang="en"
+  >
+    <div
+      class="about-container"
+    >
+      <div
+        class="about-heading"
+      >
+        <h2>
+          About Us
+        </h2>
+        <p>
+          <span>
+            Health
+          </span>
+           is at the heart of our work.
+        </p>
+        <p>
+          We are committed to empowering refugee women and girls with essential
+          <span>
+             health education
+          </span>
+          , resources, and opportunities to thrive.
+        </p>
+        <p>
+          Our mission, vision, and values guide us in building a future where
+          <span>
+             health
+          </span>
+          , dignity, and equality are within reach for everyone.
+        </p>
+      </div>
+      <div
+        class="about-slider"
+      >
+        <div
+          data-testid="mock-slider"
+        >
+          <div>
+            <div
+              class="about-card"
+            >
+              <div
+                class="about-card-top"
+              >
+                <p>
+                  Mission
+                </p>
+              </div>
+              <div
+                class="about-card-body"
+              >
+                <p
+                  class="about-text"
+                >
+                  CycleSafe’s mission is to ensure that women and girls in Kakuma Refugee Camp can access essential sexual and reproductive health education. We empower refugee communities with knowledge about their bodies and rights, building confidence, dignity, and informed decision-making. Our mission bridges barriers caused by displacement by providing safe digital spaces and tailored resources that reflect the realities of refugee life.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div
+              class="about-card"
+            >
+              <div
+                class="about-card-top"
+              >
+                <p>
+                  Vision
+                </p>
+              </div>
+              <div
+                class="about-card-body"
+              >
+                <p
+                  class="about-text"
+                >
+                  We envision a world where every refugee woman and girl has equal access to education, health, and opportunities, and is empowered to lead, make choices, and shape her own future with dignity and confidence.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div
+              class="about-card"
+            >
+              <div
+                class="about-card-top"
+              >
+                <p>
+                  Values
+                </p>
+              </div>
+              <div
+                class="about-card-body"
+              >
+                <ul
+                  class="about-list"
+                >
+                  <li>
+                    Refugee-Centered Empowerment: Every refugee deserves access to knowledge that protects health and strengthens futures.
+                  </li>
+                  <li>
+                    Equity & Inclusion: No woman or girl should be excluded because of displacement, culture, or circumstance.
+                  </li>
+                  <li>
+                    Resilience & Hope: Building sustainable pathways that honor the strength and potential of refugee communities.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div
+              class="about-card"
+            >
+              <div
+                class="about-card-top"
+              >
+                <p>
+                  Our Story
+                </p>
+              </div>
+              <div
+                class="about-card-body"
+              >
+                <p
+                  class="about-text"
+                >
+                  CycleSafe was founded with a clear purpose: to close the knowledge gap faced by women and girls in Kakuma Refugee Camp. Displacement often limits access to resources and reproductive health information, leaving many without the support they need to stay healthy and safe. Through our digital platform and community-led initiatives, CycleSafe provides knowledge, encouragement, and empowerment. Our journey reflects resilience and hope, amplifying voices that are too often unheard and showing that with the right tools, women and girls can thrive even in displacement.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

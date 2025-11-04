@@ -2,6 +2,8 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2022",
+    "jsx": "react-jsx",                      // ✅ Enable React JSX
+    "esModuleInterop": true, 
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
