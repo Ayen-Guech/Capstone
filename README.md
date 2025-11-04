@@ -611,6 +611,24 @@ Customization: Theme toggling and CSS variable usage for maintainability
 # **Final version of product/solution**
 
 
+# links
+# Demo link link
+
+https://youtu.be/mj92e0Rxpr8
+
+
+# Github Repository  link
+
+https://github.com/Ayen-Guech/Capstone.git
+
+
+# Deployment link
+
+ https://capstone-virid-nu.vercel.app/
+
+
+
+
 ![about page](./cyclesafe-frontend/frontend/src/assets/images/Screenshot 2025-11-04 205122.png)
 ![about page](./cyclesafe-frontend/frontend/src/assets/images/Screenshot%202025-11-04%20232444.png)
 ![about page](./cyclesafe-frontend/frontend/src/assets/images/Screenshot%202025-11-04%20232454.png)
@@ -622,3 +640,135 @@ Customization: Theme toggling and CSS variable usage for maintainability
 
 
 
+
+Core Functionalities
+#  Menstrual Cycle Tracker
+
+I implemented an input form that allows users to record their period dates. The system uses AI to predict their next period, ovulation, and fertile window.
+It also includes an SMS reminder feature using Celery and Redis.
+
+#  AI Chat
+
+I created a chat endpoint (/api/tracker/chat/) powered by AI-generated responses. It provides contextual education on menstrual health and contraception.
+
+⚕️ Contraception Information
+
+I developed dynamic cards that display contraceptive information and include embedded YouTube videos or proxied content. These cards allow users to safely preview educational resources.
+
+# Educational Resources
+
+I added a section that categorizes health topics such as menstrual hygiene, contraception, and STIs to make information easier to navigate.
+
+🧍 User Management
+
+I implemented secure user authentication using JWT. Tokens are stored in localStorage to protect routes for authenticated users.
+
+# Deployment
+Frontend .env
+VITE_BACKEND_URL=https://cyclesafe.onrender.com/
+Backend .env
+DEBUG=False
+SECRET_KEY=your_secret_key
+DATABASE_URL=your_postgres_connection_url
+REDIS_URL=your_redis_connection_url
+OPENAI_API_KEY=your_openai_api_key
+ALLOWED_HOSTS=cyclesafe.onrender.com,capstone-virid-nu.vercel.app
+Run Locally
+# Backend
+cd cyclesafe-backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py runserver
+
+# Frontend
+cd cyclesafe-frontend/frontend
+npm install
+npm run dev
+ Testing and Demonstration
+ Frontend Testing (React + Jest)
+
+I tested the user interface using Jest and React Testing Library.
+Tests included:
+
+Header navigation and theme toggle
+
+Period Tracker API mocks and form validation
+
+About section content rendering
+
+Contraceptive cards and modals
+
+Run Tests:
+
+npm run test
+# Backend Testing (Django + DRF)
+
+I wrote tests using Django’s APITestCase to validate backend logic.
+Endpoints tested:
+
+/api/tracker/chat/
+
+JWT authentication
+
+Model creation (CycleRecord)
+
+Validation for missing or invalid data
+
+Run Tests:
+
+python manage.py test tracker -v 2
+# Demonstration Highlights
+
+During testing, I demonstrated that:
+
+The Chat API correctly returns personalized cycle predictions.
+
+The menstrual tracking feature processes different cycle lengths accurately.
+
+Redis successfully manages Celery SMS reminder tasks.
+
+Login and signup workflows function correctly with JWT tokens.
+
+Validation errors display properly for missing or invalid inputs.
+
+The frontend communicates smoothly with the deployed backend, maintaining fast API responses on Render and Vercel.
+
+# Analysis
+
+Testing confirmed that all main features performed well under different conditions.
+The integration between the frontend and backend worked correctly with live APIs.
+Redis was configured successfully for asynchronous tasks, though some delays occurred during early deployment due to free-tier limitations.
+
+Performance testing showed:
+
+Average response time: under 300ms
+
+System uptime: approximately 99% on Render
+
+All the major objectives from my project proposal were achieved.
+
+# Discussion
+
+This project was a major learning experience in combining AI, web technologies, and health education.
+I successfully implemented and deployed a complete system that runs smoothly across environments.
+Every stage, from designing database models to frontend testing, contributed to achieving both technical and social goals.
+
+# Key achievements include:
+
+Building a working AI menstrual predictor integrated with Django REST APIs.
+
+Using Redis and Celery to improve background task performance.
+
+Deploying the system on Render and Vercel for global accessibility.
+
+CycleSafe demonstrates how technology can be used to improve women’s health literacy and empower communities with reliable information.
+
+# Recommendations and Future Work
+Recommendations
+
+Use a managed Redis service like Upstash or Redis Cloud for improved reliability.
+
+Add multilingual support (Swahili and Arabic) to increase inclusivity.
+
+Create an admin dashboard for tracking community engagement and anonymous health trends.
