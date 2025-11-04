@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./ChatPage.css";
 
+// ✅ Use environment variable for backend (same as other pages)
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
+
+console.log("🌍 Tracker backend:", `${BACKEND_URL}api/tracker/chat/`);
+
 const PeriodTracker: React.FC = () => {
   const [message, setMessage] = useState("");
   const [cycleLength, setCycleLength] = useState("");
@@ -29,8 +35,9 @@ const PeriodTracker: React.FC = () => {
     setError(null);
 
     try {
+      // ✅ Use deployed backend endpoint dynamically
       const res = await axios.post(
-        "http://127.0.0.1:8000/api/tracker/chat/",
+        `${BACKEND_URL}api/tracker/chat/`,
         {
           message,
           cycle_length: cycleLength ? Number(cycleLength) : null,
@@ -45,6 +52,7 @@ const PeriodTracker: React.FC = () => {
           timeout: 25000,
         }
       );
+
       setResponse(res.data);
     } catch (error: any) {
       if (error.response) {
@@ -61,7 +69,7 @@ const PeriodTracker: React.FC = () => {
         );
       } else if (error.request) {
         setError(
-          "No response from backend. Make sure Django is running and CORS is enabled."
+          "No response from backend. Please make sure your server is running."
         );
       } else {
         setError("Unexpected error: " + error.message);
@@ -79,19 +87,20 @@ const PeriodTracker: React.FC = () => {
         <div className="infoCard">
           <h1 className="mainTitle">Welcome to Your Period Tracker</h1>
           <p className="subText">
-            Understand your body better through science, care, and personalized AI insights.
+            Understand your body better through science, care, and personalized
+            AI insights.
           </p>
 
           <div className="chatIntro">
             <p>
-              Monitoring your menstrual cycle is more than simply tracking dates. It is about
-              understanding your health. Your cycle reflects your hormones, emotions, and
-              overall wellbeing. Regular tracking helps you predict changes, identify
-              irregularities, and take charge of your reproductive health.
+              Monitoring your menstrual cycle is more than simply tracking
+              dates. It is about understanding your health. Your cycle reflects
+              your hormones, emotions, and overall wellbeing.
             </p>
             <p>
-              With <strong>CycleSafe</strong>, you receive AI-powered predictions, helpful
-              reminders, and personalized insights that empower you every month.
+              With <strong>CycleSafe</strong>, you receive AI-powered
+              predictions, helpful reminders, and personalized insights that
+              empower you every month.
             </p>
           </div>
         </div>
