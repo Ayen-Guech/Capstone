@@ -1,4 +1,4 @@
-update it here /* ===========================
+/* ===========================
    🌍 ABOUT SECTION BASE
    =========================== */
 .about-section {
@@ -229,4 +229,26 @@ update it here /* ===========================
   .about-card-body {
     padding: 1.25rem;
   }
+}
+
+/* ===========================
+   ✅ Deployment Stability Patch
+   =========================== */
+
+/* Ensures consistent height alignment inside React Slick after deployment */
+.slick-slide,
+.slick-slide > div {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  height: 100% !important;
+}
+
+/* Prevents text shrink/stretch issues in production build */
+.about-text,
+.about-list li {
+  word-wrap: break-word !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  hyphens: auto !important;
 }

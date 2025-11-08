@@ -11,10 +11,9 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
-  padding: 0.6rem 0; /* no side padding */
+  padding: 0.6rem 0;
 }
 
-/* Remove default Bootstrap padding inside Container */
 .no-padding-container {
   padding-left: 0 !important;
   padding-right: 0 !important;
@@ -31,8 +30,7 @@
   font-size: 1.6rem;
   font-weight: 700;
   color: #fff !important;
-  margin-left: 0; /* flush with left edge */
-  padding-left: 1rem; /* small breathing space */
+  padding-left: 1rem;
 }
 
 .brand-click:hover {
@@ -47,7 +45,7 @@
   border: none;
   border-radius: 8px;
   padding: 0.4rem 0.6rem;
-  margin-right: 1rem; /* flush to right with tiny gap */
+  margin-right: 1rem;
 }
 
 .custom-toggler-icon {
@@ -61,7 +59,7 @@
 
 .custom-toggler-icon::before,
 .custom-toggler-icon::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 24px;
   height: 2px;
@@ -107,8 +105,7 @@
 }
 
 /* ==========================
-/* ==========================
-   THEME TOGGLE BUTTON (FIXED ALIGNMENT)
+   THEME TOGGLE BUTTON
 ========================== */
 .theme-toggle-btn {
   border: none;
@@ -118,7 +115,7 @@
   color: #fff;
   background-color: #E05A54;
   margin-left: 1.5rem;
-  margin-right: 1.5rem; /* ✅ adds breathing space from right edge */
+  margin-right: 1.5rem;
   transition: all 0.3s ease;
 }
 
@@ -130,35 +127,87 @@
   background-color: #ff4b8b;
 }
 
-/* Add a slight hover polish */
 .theme-toggle-btn:hover {
   opacity: 0.9;
   transform: scale(1.03);
 }
 
 /* ==========================
-   RESPONSIVE FIXES
+   DESKTOP DEFAULT NAV
+========================== */
+.navbar-collapse {
+  display: flex !important;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.slide-collapse {
+  display: none;
+}
+
+/* ==========================
+   MOBILE SLIDE-IN (LEFT)
 ========================== */
 @media (max-width: 992px) {
-  .custom-navbar {
-    padding: 0.5rem 0;
-  }
-
-  .custom-toggler {
-    margin-right: 1rem;
-  }
-
-  .brand-click {
-    padding-left: 1rem;
-  }
-
   .navbar-collapse {
-    background-color: #6A0D25;
-    text-align: center;
-    border-radius: 0 0 10px 10px;
+    display: none !important;
   }
 
-  .nav-link {
-    margin: 0.5rem 0;
+  .slide-collapse {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 75%;
+    height: 100vh;
+    background: rgba(106, 13, 37, 0.9); /* frosted effect */
+    backdrop-filter: blur(6px);
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.4);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 4rem;
+    transition: left 0.4s ease, opacity 0.4s ease;
+    z-index: 999;
+    opacity: 0;
+  }
+
+  .slide-collapse.show-slide {
+    left: 0;
+    opacity: 1;
+  }
+
+  .slide-collapse .nav-link,
+  .slide-collapse .dropdown-item {
+    color: #fff !important;
+    font-size: 1.1rem;
+    margin: 0.8rem 0;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .slide-collapse .nav-link:hover,
+  .slide-collapse .dropdown-item:hover {
+    color: #E05A54 !important;
+    transform: scale(1.05);
+  }
+
+  /* BACKDROP OVERLAY */
+  .navbar-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 998;
+  }
+
+  .navbar-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
   }
 }

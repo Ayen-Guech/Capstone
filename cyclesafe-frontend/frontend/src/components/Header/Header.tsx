@@ -9,7 +9,7 @@ import AuthPage from "../../pages/LoginPage";
 
 interface HeaderProps {
   onNavigate: (section: string) => void;
-  onLoginClick?: () => void; // ✅ Added this line
+  onLoginClick?: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
   const handleLoginClick = () => {
     setExpanded(false);
     setShowAuth(true);
-    if (onLoginClick) onLoginClick(); // ✅ optional callback if parent passes it
+    if (onLoginClick) onLoginClick();
   };
 
   return (
@@ -40,6 +40,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
         }`}
       >
         <Container fluid className="no-padding-container">
+          {/* Brand */}
           <Navbar.Brand
             onClick={() => handleNavClick("home")}
             className="fw-bold text-white brand-click"
@@ -47,14 +48,16 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
             CycleSafe
           </Navbar.Brand>
 
+          {/* Toggle Button */}
           <Navbar.Toggle
             aria-controls="basic-navbar-nav"
-            onClick={() => setExpanded(expanded ? false : true)}
+            onClick={() => setExpanded(!expanded)}
             className="custom-toggler"
           >
             <span className="custom-toggler-icon"></span>
           </Navbar.Toggle>
 
+          {/* Desktop Navbar */}
           <Navbar.Collapse
             id="basic-navbar-nav"
             className="justify-content-end text-center"
@@ -95,9 +98,57 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
               </button>
             </Nav>
           </Navbar.Collapse>
+
+          {/* Mobile Slide-In Drawer */}
+          <div className={`slide-collapse ${expanded ? "show-slide" : ""}`}>
+            <Nav className="align-items-center flex-column text-center mt-4">
+              <Nav.Link onClick={() => handleNavClick("home")}>Home</Nav.Link>
+              <Nav.Link onClick={() => handleNavClick("about")}>About</Nav.Link>
+              <Nav.Link onClick={handleLoginClick}>Login</Nav.Link>
+              <Nav.Link onClick={() => handleNavClick("chatbot")}>
+                Chatbot
+              </Nav.Link>
+
+              <NavDropdown title="Resources" id="resources-dropdown-mobile">
+                <NavDropdown.Item onClick={() => handleNavClick("menstrual")}>
+                  Menstrual Health
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleNavClick("contraception")}>
+                  Contraceptive Info
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleNavClick("sti")}>
+                  STI Information
+                </NavDropdown.Item>
+              </NavDropdown>
+
+              <Nav.Link onClick={() => handleNavClick("blog")}>Blog</Nav.Link>
+              <Nav.Link onClick={() => handleNavClick("donation")}>Donation</Nav.Link>
+
+              <button
+                onClick={() => {
+                  toggleTheme();
+                  setExpanded(false);
+                }}
+                className={`theme-toggle-btn ${
+                  theme === "light" ? "light-mode" : "dark-mode"
+                }`}
+              >
+                {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+              </button>
+            </Nav>
+          </div>
         </Container>
       </Navbar>
 
+      {/* Backdrop Overlay for Mobile Drawer */}
+      {expanded && (
+        <div
+          className="navbar-backdrop active"
+          onClick={() => setExpanded(false)}
+        ></div>
+      )}
+
+      {/* Auth Modal */}
       {showAuth && <AuthPage onClose={() => setShowAuth(false)} />}
     </>
   );
