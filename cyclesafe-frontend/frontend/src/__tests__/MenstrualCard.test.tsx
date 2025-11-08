@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import MenstrualCard, { MenstrualResult } from "../components/MenstrualCard";
+import { MenstrualCard } from "../components/MenstrualCard"; // ✅ actual component import
+import type { MenstrualResult } from "../components/MenstrualCard"; // ✅ type-only import
 
 describe("🩸 MenstrualCard Component", () => {
   const mockOnOpen = jest.fn();
@@ -21,15 +22,12 @@ describe("🩸 MenstrualCard Component", () => {
   test("renders the card with correct content", () => {
     render(<MenstrualCard item={mockItem} onOpen={mockOnOpen} />);
 
-    // Headline and snippet
     expect(
       screen.getByText(/Understanding Menstrual Health/i)
     ).toBeInTheDocument();
     expect(
       screen.getByText(/Learn about the phases of your menstrual cycle/i)
     ).toBeInTheDocument();
-
-    // Metadata (source + published date)
     expect(
       screen.getByText(/World Health Organization • 2025-11-02/i)
     ).toBeInTheDocument();
@@ -39,10 +37,7 @@ describe("🩸 MenstrualCard Component", () => {
     render(<MenstrualCard item={mockItem} onOpen={mockOnOpen} />);
     const openButton = screen.getByRole("button", { name: /Open/i });
     fireEvent.click(openButton);
-    expect(mockOnOpen).toHaveBeenCalledWith(
-      mockItem.url,
-      mockItem.title
-    );
+    expect(mockOnOpen).toHaveBeenCalledWith(mockItem.url, mockItem.title);
   });
 
   test("renders a working external link", () => {
