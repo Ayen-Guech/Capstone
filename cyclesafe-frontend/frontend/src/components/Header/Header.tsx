@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { ThemeContext } from "../../context/ThemeContext";
-import AuthPage from "../../pages/LoginPage";
+import { useNavigate } from "react-router-dom";
 
 interface HeaderProps {
   onNavigate: (section: string) => void;
@@ -15,7 +15,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [expanded, setExpanded] = useState(false);
-  const [showAuth, setShowAuth] = useState(false);
+  const nav = useNavigate();
 
   const handleNavClick = (section: string) => {
     onNavigate(section);
@@ -24,7 +24,10 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
 
   const handleLoginClick = () => {
     setExpanded(false);
-    setShowAuth(true);
+
+    // Go to login page
+    nav("/login");
+
     if (onLoginClick) onLoginClick();
   };
 
@@ -65,7 +68,10 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
             <Nav className="align-items-center">
               <Nav.Link onClick={() => handleNavClick("home")}>Home</Nav.Link>
               <Nav.Link onClick={() => handleNavClick("about")}>About</Nav.Link>
+
+              {/* Updated Login link */}
               <Nav.Link onClick={handleLoginClick}>Login</Nav.Link>
+
               <Nav.Link onClick={() => handleNavClick("chatbot")}>
                 Chatbot
               </Nav.Link>
@@ -80,10 +86,15 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
                 <NavDropdown.Item onClick={() => handleNavClick("sti")}>
                   STI Information
                 </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => onNavigate("srh-dashboard")}>
+                  General SRH Dashboard
+                </NavDropdown.Item>
               </NavDropdown>
 
               <Nav.Link onClick={() => handleNavClick("blog")}>Blog</Nav.Link>
-              <Nav.Link onClick={() => handleNavClick("donation")}>Donation</Nav.Link>
+              <Nav.Link onClick={() => handleNavClick("donation")}>
+                Donation
+              </Nav.Link>
 
               <button
                 onClick={() => {
@@ -94,7 +105,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
                   theme === "light" ? "light-mode" : "dark-mode"
                 }`}
               >
-                {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+                {theme === "light" ? " Dark" : " Light"}
               </button>
             </Nav>
           </Navbar.Collapse>
@@ -104,7 +115,10 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
             <Nav className="align-items-center flex-column text-center mt-4">
               <Nav.Link onClick={() => handleNavClick("home")}>Home</Nav.Link>
               <Nav.Link onClick={() => handleNavClick("about")}>About</Nav.Link>
+
+              {/* Updated Login for mobile */}
               <Nav.Link onClick={handleLoginClick}>Login</Nav.Link>
+
               <Nav.Link onClick={() => handleNavClick("chatbot")}>
                 Chatbot
               </Nav.Link>
@@ -119,10 +133,15 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
                 <NavDropdown.Item onClick={() => handleNavClick("sti")}>
                   STI Information
                 </NavDropdown.Item>
+                 <NavDropdown.Item onClick={() => handleNavClick("srh-dashboard")}>
+                  General SRH Dashboard
+                </NavDropdown.Item>
               </NavDropdown>
 
               <Nav.Link onClick={() => handleNavClick("blog")}>Blog</Nav.Link>
-              <Nav.Link onClick={() => handleNavClick("donation")}>Donation</Nav.Link>
+              <Nav.Link onClick={() => handleNavClick("donation")}>
+                Donation
+              </Nav.Link>
 
               <button
                 onClick={() => {
@@ -140,16 +159,13 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
         </Container>
       </Navbar>
 
-      {/* Backdrop Overlay for Mobile Drawer */}
+      {/* Backdrop Overlay */}
       {expanded && (
         <div
           className="navbar-backdrop active"
           onClick={() => setExpanded(false)}
         ></div>
       )}
-
-      {/* Auth Modal */}
-      {showAuth && <AuthPage onClose={() => setShowAuth(false)} />}
     </>
   );
 };

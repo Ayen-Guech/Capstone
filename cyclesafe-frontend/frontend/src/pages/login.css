@@ -1,60 +1,333 @@
-.auth-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(3px);
+/* ===================================================
+   REMOVE GLOBAL INTERFERENCE
+   =================================================== */
+
+body, html {
+  background: none !important;
+  background-color: transparent !important;
+}
+
+#root {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ===================================================
+   FULL LOGIN PAGE WRAPPER — FIXES WHITE GAP
+   =================================================== */
+
+.login-page-wrapper {
+  min-height: 100vh;
+  height: 100vh;
+  width: 100%;
+
+  /* Brand gradient */
+  background: linear-gradient(
+    135deg,
+    #6A0D25 0%,
+    #8C1032 35%,
+    #B81642 60%,
+    #E05A54 100%
+  ) !important;
+
+  background-size: cover !important;
+  background-position: center !important;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1050;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  /* FIX WHITE LINE UNDER HEADER */
+  position: relative;
+  top: -70px;           /* Move gradient UP behind header */
+  padding-top: 70px !important;  /* Keep login card centered */
 }
 
-.auth-popup {
-  z-index: 1051;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  transform: scale(0.95);
-  opacity: 0;
+/* ===================================================
+   MAKE HEADER TRANSPARENT ON LOGIN PAGE
+   =================================================== */
+
+.login-page-wrapper .custom-navbar {
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
-.fade-in {
-  opacity: 1;
-  transform: scale(1);
+/* ===================================================
+   LOGIN CONTAINER
+   =================================================== */
+
+.auth-page-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-.fade-out {
-  opacity: 0;
-  transform: scale(0.9);
+/* ===================================================
+   GLASS CARD
+   =================================================== */
+
+.auth-card {
+  width: 420px;
+  min-height: 480px;
+
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 2px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 25px !important;
+
+  padding: 40px !important;
+  position: relative;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow: 0px 12px 38px rgba(0, 0, 0, 0.45) !important;
+
+  animation: fadeLogin 0.6s ease;
 }
 
-.close-btn {
+/* ===================================================
+   CLOSE BUTTON (X)
+   =================================================== */
+
+.login-close-btn {
   position: absolute;
-  top: 10px;
-  right: 14px;
+  top: 12px;
+  right: 12px;
+
+  width: 36px;
+  height: 36px;
+
+  background: rgba(255, 255, 255, 0.20);
   border: none;
-  background: #d6336c;
-  color: white;
-  border-radius: 8px;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: bold;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s ease;
-}
-
-.close-btn:hover {
-  background: #b02253;
-}
-
-.auth-link {
-  color: #d6336c;
   cursor: pointer;
-  font-weight: 600;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition: 0.2s ease;
 }
 
-.auth-link:hover {
-  text-decoration: underline;
+.login-close-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.08);
 }
+
+/* ===================================================
+   FORM ELEMENTS
+   =================================================== */
+
+.auth-title {
+  text-align: center;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.inputbox {
+  position: relative;
+  width: 100%;
+  margin: 26px 0;
+  border-bottom: 2px solid #fff;
+}
+
+.inputbox input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #fff;
+  padding: 0 10px;
+}
+
+.inputbox label {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ffffffc4;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+.inputbox input:focus ~ label,
+.inputbox input:not(:placeholder-shown) ~ label {
+  top: -8px;
+  font-size: 0.8em;
+  color: #ffd6e7;
+}
+
+.auth-btn {
+  width: 100%;
+  height: 48px;
+  margin-top: 10px;
+  border-radius: 30px;
+  border: none;
+
+  background: linear-gradient(to right, #ff2d82, #d6336c);
+  color: #fff;
+  font-size: 1em;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.auth-btn:hover {
+  opacity: 0.85;
+  transform: scale(0.98);
+}
+
+/* ===================================================
+   ALERTS / LINKS
+   =================================================== */
+
+.alert-box {
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.9em;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.alert-box.error {
+  background: rgba(255, 30, 50, 0.25);
+  border: 1px solid rgba(255, 0, 0, 0.35);
+  color: #ffe1e4;
+}
+
+.alert-box.success {
+  background: rgba(0, 255, 120, 0.25);
+  border: 1px solid rgba(0, 255, 120, 0.35);
+  color: #ddffe5;
+}
+
+.auth-links {
+  margin-top: 12px;
+  text-align: right;
+}
+
+.auth-links a {
+  color: #fff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.register-msg {
+  text-align: center;
+  margin-top: 16px;
+  color: #fff;
+}
+
+.register-msg a {
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ===================================================
+   ANIMATION
+   =================================================== */
+
+@keyframes fadeLogin {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================================
+   MOBILE RESPONSIVENESS
+   =================================================== */
+
+@media (max-width: 480px) {
+
+  .auth-card {
+    width: 90% !important;
+    padding: 26px !important;
+    border-radius: 18px !important;
+  }
+
+  .auth-title {
+    font-size: 22px !important;
+  }
+
+  .inputbox {
+    margin: 20px 0 !important;
+  }
+
+  .inputbox input {
+    height: 44px !important;
+    font-size: 0.95em !important;
+  }
+
+  .auth-btn {
+    height: 44px !important;
+    font-size: 0.95em !important;
+  }
+
+  .auth-links {
+    text-align: center !important;
+  }
+
+  .register-msg {
+    font-size: 0.95em !important;
+  }
+}
+
+@media (max-width: 360px) {
+
+  .auth-card {
+    width: 92% !important;
+    padding: 22px !important;
+    border-radius: 16px !important;
+  }
+
+  .auth-title {
+    font-size: 20px !important;
+  }
+
+  .inputbox input {
+    height: 40px !important;
+    font-size: 0.9em !important;
+  }
+
+  .auth-btn {
+    height: 40px !important;
+    font-size: 0.9em !important;
+  }
+
+  .login-close-btn {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 16px !important;
+  }
+}
+
+
+/* Remove global fade/line dividers that cause white space */
+.login-page-wrapper::after {
+  display: none !important;
+}
+

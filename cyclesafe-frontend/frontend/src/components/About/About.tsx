@@ -1,9 +1,11 @@
+// src/components/About/About.tsx
 import React, { useContext } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
+import { ThemeContext } from "../../context/ThemeContext"; // assuming you already have global theme context
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./About.css";
+import images100 from "../../assets/images/images100.jpeg";
 
 interface AboutItem {
   name: string;
@@ -14,27 +16,32 @@ const data: AboutItem[] = [
   {
     name: "Mission",
     review: [
-      "CycleSafe’s mission is to ensure that women and girls in Kakuma Refugee Camp can access essential sexual and reproductive health education. We empower refugee communities with knowledge about their bodies and rights, building confidence, dignity, and informed decision-making. Our mission bridges barriers caused by displacement by providing safe digital spaces and tailored resources that reflect the realities of refugee life."
+      "• Expand Access: Ensure women and girls in Kakuma Refugee Camp have access to vital sexual and reproductive health education.",
+      "• Empower Refugees: Equip refugee communities with knowledge about their bodies and rights to foster dignity and self-confidence.",
+      "• Bridge Gaps: Overcome barriers of displacement by providing safe digital spaces and resources tailored to refugee realities."
     ]
   },
   {
     name: "Vision",
     review: [
-      "We envision a world where every refugee woman and girl has equal access to education, health, and opportunities, and is empowered to lead, make choices, and shape her own future with dignity and confidence."
+      "A future where refugee women and girls are empowered with education, health, and opportunities to shape their own destinies."
     ]
   },
   {
     name: "Values",
     review: [
-      "Refugee-Centered Empowerment: Every refugee deserves access to knowledge that protects health and strengthens futures.",
-      "Equity & Inclusion: No woman or girl should be excluded because of displacement, culture, or circumstance.",
-      "Resilience & Hope: Building sustainable pathways that honor the strength and potential of refugee communities."
+      "• Refugee-Centered Empowerment: Every refugee deserves access to knowledge that protects health and strengthens futures.",
+      "• Equity & Inclusion: No woman or girl should be excluded because of displacement, culture, or circumstance.",
+      "• Resilience & Hope: Building sustainable pathways that honor the strength and potential of refugee communities."
     ]
   },
   {
     name: "Our Story",
     review: [
-      "CycleSafe was founded with a clear purpose: to close the knowledge gap faced by women and girls in Kakuma Refugee Camp. Displacement often limits access to resources and reproductive health information, leaving many without the support they need to stay healthy and safe. Through our digital platform and community-led initiatives, CycleSafe provides knowledge, encouragement, and empowerment. Our journey reflects resilience and hope, amplifying voices that are too often unheard and showing that with the right tools, women and girls can thrive even in displacement."
+      "CycleSafe began with a vision to close the knowledge gap for women and girls living in Kakuma Refugee Camp.",
+      "Displacement often strips people of resources, dignity, and opportunities, especially in reproductive health.",
+      "Through a safe digital platform and community-led initiatives, CycleSafe delivers education, support, and empowerment.",
+      "Our story is one of resilience, amplifying voices too often unheard and proving that even in displacement, women and girls can thrive with the right tools and knowledge."
     ]
   }
 ];
@@ -56,13 +63,16 @@ const About: React.FC = () => {
   };
 
   return (
-    <div className={`about-section ${theme}`} lang="en">
+    <div
+      className={`about-section ${theme}`}
+      style={{
+        
+      }}
+    >
       <div className="about-container">
         <div className="about-heading">
           <h2>About Us</h2>
-          <p>
-            <span>Health</span> is at the heart of our work.
-          </p>
+          <p><span>Health</span> is at the heart of our work.</p>
           <p>
             We are committed to empowering refugee women and girls with essential
             <span> health education</span>, resources, and opportunities to thrive.
@@ -82,17 +92,9 @@ const About: React.FC = () => {
                     <p>{d.name}</p>
                   </div>
                   <div className="about-card-body">
-                    {d.name === "Mission" ||
-                    d.name === "Our Story" ||
-                    d.name === "Vision" ? (
-                      <p className="about-text">{d.review[0]}</p>
-                    ) : (
-                      <ul className="about-list">
-                        {d.review.map((line, idx) => (
-                          <li key={idx}>{line}</li>
-                        ))}
-                      </ul>
-                    )}
+                    {d.review.map((line, idx) => (
+                      <p key={idx}>{line}</p>
+                    ))}
                   </div>
                 </div>
               </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./ChatPage.css";
 
-// ✅ Use environment variable for backend (same as other pages)
+//  Use environment variable for backend (same as other pages)
 const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
 
@@ -35,7 +35,7 @@ const PeriodTracker: React.FC = () => {
     setError(null);
 
     try {
-      // ✅ Use deployed backend endpoint dynamically
+      //  Use deployed backend endpoint dynamically
       const res = await axios.post(
         `${BACKEND_URL}api/tracker/chat/`,
         {
@@ -57,7 +57,7 @@ const PeriodTracker: React.FC = () => {
     } catch (error: any) {
       if (error.response) {
         if (error.response.status === 401) {
-          alert("⚠️ Session expired. Please log in again.");
+          alert("Session expired. Please log in again.");
           localStorage.removeItem("cyclesafe_token");
           window.location.href = "/login";
           return;
@@ -81,7 +81,7 @@ const PeriodTracker: React.FC = () => {
 
   return (
     <div className="page">
-      {/* 🌸 Hero Section */}
+      {/*  Hero Section */}
       <div className="headerSection">
         {/* Left Side */}
         <div className="infoCard">

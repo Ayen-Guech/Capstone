@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import ContraceptionDashboard from "./pages/ContraceptionDashboard";
 import StiDashboard from "./pages/STIDashboard";
 import MenstrualDashboard from "./pages/MenstrualDashboard";
+import SRHDashboard from "./pages/SRHDashboard";
 import Footer from "./components/Footer/Footer";
 import ArticleList from "./pages/ArticleList";
 import ArticleDetail from "./pages/ArticleDetail";
@@ -19,22 +20,21 @@ import BlogDetail from "./components/blog/BlogDetail";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 const App: React.FC = () => {
-  const [showAuth, setShowAuth] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Handle navigation (used by Header)
+  // Handle navigation from Header
   const handleNavigate = (section: string) => {
     if (
       section === "contraception" ||
       section === "sti" ||
       section === "menstrual" ||
       section === "articles" ||
-      section === "blog"
+      section === "blog" ||
+      section === "srh-dashboard"
     ) {
       navigate(`/${section}`);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      // Scroll to section on home page
       navigate("/");
       setTimeout(() => {
         const el = document.getElementById(section);
@@ -45,32 +45,12 @@ const App: React.FC = () => {
 
   return (
     <div>
-      {/* 🩷 Header */}
-      <Header onLoginClick={() => setShowAuth(true)} onNavigate={handleNavigate} />
+      {/* Header */}
+      <Header onNavigate={handleNavigate} />
 
-      {/* 🔐 Login Modal */}
-      {showAuth && (
-        <div
-          className="auth-overlay"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setShowAuth(false);
-          }}
-        >
-          <div className="auth-modal">
-            <button
-              className="btn btn-outline-secondary btn-sm close-btn"
-              onClick={() => setShowAuth(false)}
-            >
-              ✕
-            </button>
-            <LoginPage {...({ onSuccess: () => setShowAuth(false) } as any)} />
-          </div>
-        </div>
-      )}
-
-      {/* 🌍 Main Routes */}
+      {/* MAIN ROUTES */}
       <Routes>
-        {/* 🏠 Default Home Page with Sections */}
+        {/* HOME sections */}
         <Route
           path="/"
           element={
@@ -88,28 +68,26 @@ const App: React.FC = () => {
           }
         />
 
-        {/* 💊 Contraception Dashboard */}
+        {/* LOGIN PAGE (standalone) */}
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* Dashboards & content */}
         <Route path="/contraception" element={<ContraceptionDashboard />} />
-
-        {/* 🧫 STI Dashboard */}
         <Route path="/sti" element={<StiDashboard />} />
-
-        {/* 🩸 Menstrual Health Dashboard */}
         <Route path="/menstrual" element={<MenstrualDashboard />} />
+        <Route path="/srh-dashboard" element={<SRHDashboard />} />
 
-        {/* 📰 Articles */}
         <Route path="/articles" element={<ArticleList />} />
         <Route path="/articles/:slug" element={<ArticleDetail />} />
 
-        {/* 🧾 Blog */}
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
 
-        {/* ❌ Redirect unknown routes */}
+        {/* REDIRECT unknown routes */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
-      {/* 🦶 Footer */}
+      {/* Footer */}
       <Footer />
     </div>
   );

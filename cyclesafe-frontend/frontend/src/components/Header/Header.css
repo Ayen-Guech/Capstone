@@ -170,6 +170,9 @@
     transition: left 0.4s ease, opacity 0.4s ease;
     z-index: 999;
     opacity: 0;
+
+    /* FIX: allow dropdown to escape the drawer */
+    overflow: visible !important;
   }
 
   .slide-collapse.show-slide {
@@ -190,6 +193,23 @@
   .slide-collapse .dropdown-item:hover {
     color: #E05A54 !important;
     transform: scale(1.05);
+  }
+
+  /* ================================
+     🔥 MOBILE DROPDOWN FIX
+     Makes the dropdown FLOAT under Resources
+     and ALWAYS be visible
+  ================================= */
+  .slide-collapse .dropdown-menu {
+    position: absolute !important;
+    top: 48px !important;     /* Adjust if needed */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 2000 !important;
+    background: #000 !important;
+    border-radius: 10px;
+    padding: 0.5rem 0;
+    width: 260px;             /* clean width */
   }
 
   /* BACKDROP OVERLAY */
