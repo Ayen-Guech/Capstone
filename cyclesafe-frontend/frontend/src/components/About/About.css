@@ -205,3 +205,201 @@
     padding: 1.25rem;
   }
 }
+
+
+
+/* ========================================
+   📱 MOBILE — SHOW ONLY 1 SLIDE FULL WIDTH
+   ======================================== */
+@media (max-width: 768px) {
+
+  /* Force slick slide container to full width */
+  .slick-slide > div {
+    display: flex !important;
+    justify-content: center;
+    width: 100% !important;
+  }
+
+  /* Make sure the card fills the screen width */
+  .about-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    margin: 0 auto;
+  }
+}
+
+/* ================================
+   CLEAN GRID LAYOUT (NO SLICK)
+   ================================ */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* Card style (keeps YOUR design) */
+.grid-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 6px 18px rgba(224, 90, 84, 0.15);
+  border: 2px solid rgba(224, 90, 84, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grid-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(224, 90, 84, 0.25);
+}
+
+.grid-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--accent-color);
+}
+
+.grid-body p {
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  text-align: left;
+}
+
+/* MOBILE VIEW (STACKED CARDS) */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ============================================
+   STATIC GRID USING ORIGINAL PINK CARD DESIGN
+   ============================================ */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* Card container — same style as before (no slick) */
+.grid-card {
+  background: var(--card-bg);
+  color: var(--card-text);
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(224, 90, 84, 0.15);
+  border: 2px solid rgba(224, 90, 84, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Pink header section */
+.grid-header {
+  background: linear-gradient(135deg, #e05a54, #f58f7c);
+  padding: 1.25rem;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Pink underline strip (same as original) */
+.grid-header::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: #ffe0dc;
+  margin: 0.5rem auto 0;
+  border-radius: 10px;
+}
+
+/* Body styling */
+.grid-body {
+  padding: 1.5rem 2rem;
+  background-color: var(--card-bg);
+}
+
+.grid-body p {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.7;
+  margin-bottom: 0.9rem;
+  text-align: left;
+}
+
+/* MOBILE – Stack cards */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* MOBILE — make card height fixed & body scrollable */
+@media (max-width: 768px) {
+  .grid-card {
+    height: 480px; /* Same as your original card height */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .grid-body {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 1rem; /* prevent scrollbar overlapping text */
+  }
+
+  /* Custom mobile scrollbar */
+  .grid-body::-webkit-scrollbar {
+    width: 6px;
+  }
+  .grid-body::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 10px;
+  }
+  .grid-body::-webkit-scrollbar-track {
+    background: #f2f2f2;
+  }
+}
+
+
+
+/* ===================================================
+   SCROLLABLE CARD CONTENT ON ALL SCREENS
+   =================================================== */
+
+.grid-card {
+  height: 480px; /* fixed card height */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* body becomes scrollable */
+.grid-body {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 1rem; /* avoid text hiding under scrollbar */
+}
+
+/* Custom scrollbar (visible on all screens) */
+.grid-body::-webkit-scrollbar {
+  width: 6px;
+}
+.grid-body::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 10px;
+}
+.grid-body::-webkit-scrollbar-track {
+  background: #f2f2f2;
+}
