@@ -43,3 +43,14 @@ h2 {
 .form button:hover {
   background-color: #7a1014;
 }
+.successMessage {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  background: #e6ffe8; /* soft green */
+  border: 1px solid #7bd57b;
+  color: #0f7a15;
+}

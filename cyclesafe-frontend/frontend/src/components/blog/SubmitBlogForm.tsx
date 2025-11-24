@@ -16,6 +16,7 @@ const SubmitBlogForm: React.FC = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   // Handle text inputs
   const handleChange = (
@@ -36,6 +37,7 @@ const SubmitBlogForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSuccessMessage("");
 
     const data = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
@@ -46,11 +48,11 @@ const SubmitBlogForm: React.FC = () => {
       await axios.post(`${VITE_BACKEND_URL}api/blog/submit-post/`, data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      alert("Your blog has been submitted for review!");
+      setSuccessMessage("🎉 Your blog has been submitted for review!");
       setFormData({ name: "", email: "", title: "", content: "", image: null });
     } catch (error) {
       console.error(error);
-      alert("There was an error submitting your blog.");
+      setSuccessMessage("❌ There was an error submitting your blog.");
     } finally {
       setIsSubmitting(false);
     }
@@ -106,6 +108,10 @@ const SubmitBlogForm: React.FC = () => {
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit Blog"}
         </button>
+
+        {successMessage && (
+          <p className={styles.successMessage}>{successMessage}</p>
+        )}
       </form>
     </div>
   );
