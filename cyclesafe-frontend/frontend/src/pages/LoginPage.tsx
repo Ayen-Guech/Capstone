@@ -10,6 +10,7 @@ const LoginPage: React.FC = () => {
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const nav = useNavigate();
 
@@ -22,6 +23,7 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     setError("");
     setSuccess("");
+    setLoading(true);
 
     try {
       if (mode === "login") {
@@ -31,8 +33,9 @@ const LoginPage: React.FC = () => {
         localStorage.setItem("cyclesafe_token", token);
         setAuthToken(token);
 
-        setSuccess("Login successful! Redirecting...");
-        setTimeout(() => nav("/chatbot"), 700);
+        setSuccess("Login successful!");
+        window.scrollTo({ top: 0, behavior: "instant" });
+        nav("/chatbot"); // 👈 instant redirect (no delay)
 
       } else if (mode === "signup") {
         await api.post("/api/auth/register/", { username, password });
@@ -53,6 +56,8 @@ const LoginPage: React.FC = () => {
     } catch (err: any) {
       setError(err.response?.data?.detail || "Action failed. Please try again.");
       clearFields();
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -62,7 +67,6 @@ const LoginPage: React.FC = () => {
 
         <div className="auth-card">
 
-          {/* CLOSE BUTTON */}
           <button className="login-close-btn" onClick={() => nav("/")}>
             ✕
           </button>
@@ -79,24 +83,19 @@ const LoginPage: React.FC = () => {
           {success && <div className="alert-box success">{success}</div>}
 
           <form onSubmit={handleSubmit}>
-
-            {/* USERNAME (NO SPACES) */}
             <div className="inputbox">
               <input
                 type="text"
                 required
                 placeholder=" "
                 value={username}
-                onChange={(e) =>
-                  setUsername(e.target.value.replace(/\s/g, ""))
-                }
+                onChange={(e) => setUsername(e.target.value.replace(/\s/g, ""))}
               />
               <label>
                 Username <span className="no-space-hint">(no spaces)</span>
               </label>
             </div>
 
-            {/* PASSWORD OR NEW PASSWORD */}
             <div className="inputbox">
               <input
                 type="password"
@@ -112,8 +111,14 @@ const LoginPage: React.FC = () => {
               <label>{mode === "reset" ? "New Password" : "Password"}</label>
             </div>
 
-            <button type="submit" className="auth-btn">
-              {mode === "login"
+            <button type="submit" className="auth-btn" disabled={loading}>
+              {loading
+                ? mode === "login"
+                  ? "Logging in..."
+                  : mode === "signup"
+                  ? "Creating..."
+                  : "Resetting..."
+                : mode === "login"
                 ? "Login"
                 : mode === "signup"
                 ? "Sign Up"

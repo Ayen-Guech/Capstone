@@ -271,3 +271,43 @@
     text-align: left;
   }
 }
+
+
+/* 📌 Fix mobile placeholder visibility for phone + number fields */
+@media (max-width: 600px) {
+  input[type="tel"].input,
+  input[type="number"].input {
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    white-space: normal;
+  }
+
+  input[type="tel"].input::placeholder,
+  input[type="number"].input::placeholder {
+    font-size: 0.82rem;
+    white-space: normal !important;
+    opacity: 1;
+  }
+}
+
+/* 📌 Show number arrows like desktop */
+input[type="number"].input {
+  -moz-appearance: textfield;
+}
+
+input[type="number"].input::-webkit-inner-spin-button,
+input[type="number"].input::-webkit-outer-spin-button {
+  opacity: 1;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* 📱 Optional Phone Input clearer */
+input[type="tel"].input {
+  letter-spacing: 0.5px;
+  text-align: left;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}

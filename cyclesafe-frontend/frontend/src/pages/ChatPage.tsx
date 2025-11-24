@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./ChatPage.css";
 
-// Use environment variable for backend
+// Environment variable for backend
 const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
-
-console.log("🌍 Tracker backend:", `${BACKEND_URL}api/tracker/chat/`);
 
 const PeriodTracker: React.FC = () => {
   const [message, setMessage] = useState("");
@@ -58,7 +56,6 @@ const PeriodTracker: React.FC = () => {
           timeout: 25000,
         }
       );
-
       setResponse(res.data);
     } catch (error: any) {
       if (error.response) {
@@ -87,12 +84,11 @@ const PeriodTracker: React.FC = () => {
     <div className="page">
       {/* Header Section */}
       <div className="headerSection">
-        {/* Left Side */}
+        {/* LEFT SIDE */}
         <div className="infoCard">
           <h1 className="mainTitle">Welcome to Your Period Tracker</h1>
           <p className="subText">
-            Understand your body better through science, care, and personalized
-            AI insights.
+            Understand your body better through science, care, and personalized AI insights.
           </p>
 
           <div className="chatIntro">
@@ -109,7 +105,7 @@ const PeriodTracker: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Side Chat Card */}
+        {/* RIGHT SIDE */}
         <div className="chatCard">
           <div className="chatBox">
             <textarea
@@ -122,7 +118,7 @@ const PeriodTracker: React.FC = () => {
 
             <input
               type="number"
-              className="input"
+              className="input numberInput"
               placeholder="Enter your cycle length (e.g. 28)"
               value={cycleLength}
               onChange={(e) => setCycleLength(e.target.value)}
@@ -132,10 +128,12 @@ const PeriodTracker: React.FC = () => {
 
             <input
               type="tel"
-              className="input"
+              className="input phoneInput"
               placeholder="Enter your phone number (optional, e.g. +2507...)"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              inputMode="numeric"
+              pattern="[0-9+]*"
             />
 
             <label className="smsLabel">
@@ -147,7 +145,7 @@ const PeriodTracker: React.FC = () => {
               Receive SMS reminders for your next period & ovulation
             </label>
 
-            {/* 🔐 Policy Agreement */}
+            {/* 🔐 Consent Policy */}
             <div className="policyBox">
               <label className="policyLabel">
                 <input
@@ -155,9 +153,9 @@ const PeriodTracker: React.FC = () => {
                   checked={agreePolicy}
                   onChange={(e) => setAgreePolicy(e.target.checked)}
                 />
-                I consent to share menstrual cycle information for AI-based
-                predictions. I understand CycleSafe is not a medical tool and
-                does not replace a doctor’s advice.
+                I consent to share menstrual cycle information for AI-based predictions.
+                I understand CycleSafe is not a medical tool and does not replace
+                a doctor’s advice.
               </label>
             </div>
 
@@ -173,7 +171,6 @@ const PeriodTracker: React.FC = () => {
       </div>
 
       {/* Error */}
-
       {error && (
         <div className="errorBox">
           <p>⚠️ {error}</p>

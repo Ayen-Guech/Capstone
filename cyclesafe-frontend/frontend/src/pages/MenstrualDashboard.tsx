@@ -10,15 +10,15 @@ import {
   Modal,
   OverlayTrigger,
   Tooltip,
-} from "react-bootstrap";
-import type { SearchResult } from "../types/types"; // ✅ Shared type
+} from "react-bootstrap"
+import type { SearchResult } from "../types/types"; //  Shared type
 
-// ✅ Dynamic backend base URL (Vercel + Local)
+//  Dynamic backend base URL (Vercel + Local)
 const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
 
-// ✅ Log to confirm the actual backend being used
-console.log("🌍 Using backend:", `${BACKEND_URL}api/search/`);
+//  Log to confirm the actual backend being used
+console.log(" Using backend:", `${BACKEND_URL}api/search/`);
 
 const MenstrualDashboard: React.FC = () => {
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -32,15 +32,15 @@ const MenstrualDashboard: React.FC = () => {
     title: string;
   } | null>(null);
 
-  // 🚸 Check if user has confirmed age
+  //  Check if user has confirmed age
   const hasConfirmedAge = localStorage.getItem("isAdultConfirmed") === "true";
 
-  // 🔍 Fetch menstrual health resources from backend
+  //  Fetch menstrual health resources from backend
   const fetchResults = async () => {
     setLoading(true);
     setError("");
     try {
-      // ✅ Always point to /api/search/
+      //  Always point to /api/search/
       const response = await fetch(
         `${BACKEND_URL}api/search/?q=${encodeURIComponent(query)}`
       );
@@ -58,7 +58,7 @@ const MenstrualDashboard: React.FC = () => {
     }
   };
 
-  // 🧠 Handle “Read More” click
+  //  Handle “Read More” click
   const handleReadMore = (item: SearchResult) => {
     const restrictedSources = [
       "World Health Organization",
@@ -78,7 +78,7 @@ const MenstrualDashboard: React.FC = () => {
     }
   };
 
-  // ✅ Confirm age and open restricted article
+  // Confirm age and open restricted article
   const handleConfirmAge = () => {
     if (selectedArticle) {
       localStorage.setItem("isAdultConfirmed", "true");
@@ -87,7 +87,7 @@ const MenstrualDashboard: React.FC = () => {
     setShowModal(false);
   };
 
-  // ❌ Cancel age confirmation modal
+  //  Cancel age confirmation modal
   const handleCancelAge = () => {
     setShowModal(false);
     setSelectedArticle(null);
@@ -102,7 +102,7 @@ const MenstrualDashboard: React.FC = () => {
           fontWeight: "700",
         }}
       >
-        🩸 Menstrual Health Dashboard
+         Menstrual Health Dashboard
       </h2>
 
       {/* 🔍 Search bar */}
@@ -132,9 +132,9 @@ const MenstrualDashboard: React.FC = () => {
           <Spinner animation="border" variant="danger" />
         </div>
       )}
-      {error && <Alert variant="danger">❌ {error}</Alert>}
+      {error && <Alert variant="danger"> {error}</Alert>}
 
-      {/* 🧠 AI Summary */}
+      {/*  AI Summary */}
       {!loading && summary && (
         <Card
           className="p-3 mb-4 shadow-sm border-0"
@@ -151,7 +151,7 @@ const MenstrualDashboard: React.FC = () => {
         </Card>
       )}
 
-      {/* 🩸 Educational Cards */}
+      {/*  Educational Cards */}
       <Row>
         {results.map((item, index) => {
           const restricted =
@@ -214,14 +214,14 @@ const MenstrualDashboard: React.FC = () => {
         })}
       </Row>
 
-      {/* 😔 No results */}
+      {/*  No results */}
       {!loading && !summary && results.length === 0 && (
         <p className="text-center mt-4" style={{ color: "var(--text-color)" }}>
           No results yet. Try searching for “period hygiene” or “PMS management”.
         </p>
       )}
 
-      {/* 🧩 Age Confirmation Modal */}
+      {/* Age Confirmation Modal */}
       <Modal show={showModal} onHide={handleCancelAge} centered>
         <Modal.Header closeButton>
           <Modal.Title style={{ fontWeight: "600", color: "#c2185b" }}>

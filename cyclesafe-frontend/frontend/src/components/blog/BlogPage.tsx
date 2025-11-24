@@ -22,6 +22,10 @@ interface BlogPost {
   comments_count: number;
 }
 
+// 🌍 Backend URL for BOTH Localhost & Vercel
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
+
 const BlogPage: React.FC = () => {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [commentTexts, setCommentTexts] = useState<Record<number, string>>({});
@@ -30,11 +34,11 @@ const BlogPage: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  //  Fetch all approved blogs
+  // 📌 Fetch all approved blogs
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/blog/approved-posts/");
+        const res = await axios.get(`${BACKEND_URL}api/blog/approved-posts/`);
         setBlogs(res.data.results || res.data);
       } catch (err) {
         console.error("Error fetching blogs:", err);
@@ -45,9 +49,10 @@ const BlogPage: React.FC = () => {
     fetchBlogs();
   }, []);
 
-  //  Like handler (instant + sync)
+  // ❤️ Like a blog (instant + sync)
   const handleLike = async (id: number) => {
-    const sessionId = localStorage.getItem("sessionId") || Math.random().toString(36);
+    const sessionId =
+      localStorage.getItem("sessionId") || Math.random().toString(36);
     localStorage.setItem("sessionId", sessionId);
 
     setBlogs((prev) =>
@@ -57,13 +62,15 @@ const BlogPage: React.FC = () => {
     );
 
     try {
-      await axios.post(`http://localhost:8000/api/blog/${id}/like/`, { session_id: sessionId });
+      await axios.post(`${BACKEND_URL}api/blog/${id}/like/`, {
+        session_id: sessionId,
+      });
     } catch (error) {
       console.error("Error liking post:", error);
     }
   };
 
-  //  Submit comment (instant + sync)
+  // 💬 Submit comment (instant + sync)
   const handleCommentSubmit = async (id: number) => {
     const text = commentTexts[id];
     if (!text?.trim()) return;
@@ -84,34 +91,37 @@ const BlogPage: React.FC = () => {
 
     setBlogs((prev) =>
       prev.map((blog) =>
-        blog.id === id ? { ...blog, comments_count: blog.comments_count + 1 } : blog
+        blog.id === id
+          ? { ...blog, comments_count: blog.comments_count + 1 }
+          : blog
       )
     );
 
     try {
-      await axios.post("http://localhost:8000/api/blog/comment/", {
+      await axios.post(`${BACKEND_URL}api/blog/comment/`, {
         post: id,
         name: "Anonymous",
         comment_text: text,
       });
-
       fetchComments(id);
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
   };
 
-  // Fetch comments for one blog
+  // 🔎 Fetch comments for one blog
   const fetchComments = async (id: number) => {
     try {
-      const res = await axios.get(`http://localhost:8000/api/blog/approved-posts/${id}/`);
+      const res = await axios.get(
+        `${BACKEND_URL}api/blog/approved-posts/${id}/`
+      );
       setComments((prev) => ({ ...prev, [id]: res.data.comments || [] }));
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
   };
 
-  // Toggle comment visibility
+  // 👁 Toggle comment visibility
   const toggleComments = (id: number) => {
     setVisibleComments((prev) => {
       if (prev.includes(id)) {
@@ -141,28 +151,38 @@ const BlogPage: React.FC = () => {
         {blogs.map((post) => (
           <div
             key={post.id}
-            className={`${styles.card} ${visibleComments.includes(post.id) ? styles.expandedCard : ""}`}
+            className={`${styles.card} ${
+              visibleComments.includes(post.id) ? styles.expandedCard : ""
+            }`}
           >
-            {post.image && <img src={post.image} alt={post.title} className={styles.image} />}
+            {post.image && (
+              <img src={post.image} alt={post.title} className={styles.image} />
+            )}
 
             <div className={styles.cardBody}>
               <h3 className={styles.title}>{post.title}</h3>
               <p className={styles.author}>👤 {post.name}</p>
               <p className={styles.date}>
-                Published: {new Date(post.submitted_at).toLocaleDateString("en-GB")}
+                Published:{" "}
+                {new Date(post.submitted_at).toLocaleDateString("en-GB")}
               </p>
 
               {/* Likes */}
               <div className={styles.actions}>
-                <button onClick={() => handleLike(post.id)} className={styles.likeBtn}>
+                <button
+                  onClick={() => handleLike(post.id)}
+                  className={styles.likeBtn}
+                >
                   ❤️ {post.likes_count}
                 </button>
               </div>
 
-              {/* 🔐 Community Rules Notice */}
+              {/* 🔐 Rules Notice */}
               <div className={styles.rulesNotice}>
-                🛡 Community Rules Apply — 
-                <Link to="/community-guidelines" className={styles.rulesLink}> View Guidelines »</Link>
+                🛡 Community Rules Apply —{" "}
+                <Link to="/community-guidelines" className={styles.rulesLink}>
+                  View Guidelines »
+                </Link>
               </div>
 
               {/* Comment Input */}
@@ -171,7 +191,10 @@ const BlogPage: React.FC = () => {
                   placeholder="Add a comment..."
                   value={commentTexts[post.id] || ""}
                   onChange={(e) =>
-                    setCommentTexts((prev) => ({ ...prev, [post.id]: e.target.value }))
+                    setCommentTexts((prev) => ({
+                      ...prev,
+                      [post.id]: e.target.value,
+                    }))
                   }
                   className={styles.commentBox}
                 />
@@ -186,7 +209,10 @@ const BlogPage: React.FC = () => {
 
               {/* Actions */}
               <div className={styles.commentActionRow}>
-                <button onClick={() => toggleComments(post.id)} className={styles.commentBtn}>
+                <button
+                  onClick={() => toggleComments(post.id)}
+                  className={styles.commentBtn}
+                >
                   💬 Comment ({post.comments_count})
                 </button>
 
@@ -198,7 +224,9 @@ const BlogPage: React.FC = () => {
               {/* Comment Section */}
               <div
                 className={`${styles.commentSection} ${
-                  visibleComments.includes(post.id) ? styles.commentVisible : ""
+                  visibleComments.includes(post.id)
+                    ? styles.commentVisible
+                    : ""
                 }`}
               >
                 {visibleComments.includes(post.id) && (
@@ -240,7 +268,10 @@ const BlogPage: React.FC = () => {
 
       {/* BLOG FORM */}
       <div className={styles.formWrapper}>
-        <button onClick={() => setShowForm(!showForm)} className={styles.toggleButton}>
+        <button
+          onClick={() => setShowForm(!showForm)}
+          className={styles.toggleButton}
+        >
           {showForm ? "✖ Close Blog Form" : " Write a Blog"}
         </button>
         {showForm && (

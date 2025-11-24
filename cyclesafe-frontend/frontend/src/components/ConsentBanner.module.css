@@ -34,7 +34,7 @@
   transition: background 0.3s ease;
 }
 
-/* 🌞 Light Theme */
+/*  Light Theme */
 .bannerLight {
   background: #fdecea; 
   color: #6A0D25;
@@ -49,7 +49,7 @@
   color: #fff;
 }
 
-/* 🌙 Dark Theme */
+/*  Dark Theme */
 .bannerDark {
   background: #6A0D25;
   color: #ffe9e4;
@@ -68,7 +68,7 @@
   background: #ffd0c2;
 }
 
-/* 📱 Responsive */
+/*  Responsive */
 @media (max-width: 600px) {
   .banner {
     flex-direction: column;
