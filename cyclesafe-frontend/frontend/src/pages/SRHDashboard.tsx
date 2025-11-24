@@ -39,12 +39,13 @@ interface Mentor {
 }
 
 /* ------------------------------------------------
-    Endpoint Configs
+    Endpoint Configs  (UPDATED NAME)
 ------------------------------------------------ */
-const BACKEND_URL =
-  import.meta.env.VITE_BACKEND_SRH || "http://127.0.0.1:8000/api/srh/";
-const FETCH_URL = `${BACKEND_URL}fetch/`;
-const DOWNLOAD_URL = `${BACKEND_URL}download/`;
+const VITE_BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/api/srh/";
+
+const FETCH_URL = `${VITE_BACKEND_URL}fetch/`;
+const DOWNLOAD_URL = `${VITE_BACKEND_URL}download/`;
 
 const SAMPLE_MENTORS: Mentor[] = [
   {
@@ -83,7 +84,9 @@ const SRHDashboard: React.FC = () => {
     setError("");
 
     try {
-      const res = await fetch(`${BACKEND_URL}?q=${encodeURIComponent(query)}`);
+      const res = await fetch(
+        `${VITE_BACKEND_URL}?q=${encodeURIComponent(query)}`
+      );
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Search failed.");
       setResults(data.results || []);
@@ -128,8 +131,8 @@ const SRHDashboard: React.FC = () => {
           fontSize: "1.1rem",
         }}
       >
-        Search verified global sources and research on SRH topics. View summaries,
-        download safe resources, or book a mentor for guidance.
+        Search verified global sources and research on SRH topics. View
+        summaries, download safe resources, or book a mentor for guidance.
       </p>
 
       {/* Search Input */}
@@ -288,7 +291,7 @@ const SRHDashboard: React.FC = () => {
 export default SRHDashboard;
 
 /* ------------------------------------------------
-    Protected Access Component
+    Protected Access Component (UPDATED LINKS)
 ------------------------------------------------ */
 interface ProtectedProps {
   sourceUrl: string;
@@ -302,7 +305,6 @@ const ProtectedAccess: React.FC<ProtectedProps> = ({ sourceUrl, topic }) => {
   const [unlocked, setUnlocked] = useState(false);
   const [failed, setFailed] = useState(false);
 
-  /* Dynamic comprehension questions */
   const topicQuestions = (topic: string) => {
     const lower = topic.toLowerCase();
 
@@ -457,9 +459,8 @@ const ProtectedAccess: React.FC<ProtectedProps> = ({ sourceUrl, topic }) => {
         </div>
       ) : failed ? (
         <Alert variant="warning" className="mt-3">
-          It looks like this article might be too advanced.
-          Consider reviewing our beginner SRH resources or booking a mentor
-          before proceeding.
+          It looks like this article might be too advanced. Consider reviewing
+          our beginner SRH resources or booking a mentor before proceeding.
         </Alert>
       ) : (
         <div className="text-start">
@@ -486,7 +487,7 @@ const ProtectedAccess: React.FC<ProtectedProps> = ({ sourceUrl, topic }) => {
               }}
               onClick={() =>
                 window.open(
-                  `/api/srh/download/?url=${encodeURIComponent(sourceUrl)}`,
+                  `${DOWNLOAD_URL}?url=${encodeURIComponent(sourceUrl)}`,
                   "_blank"
                 )
               }
