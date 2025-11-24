@@ -18,10 +18,10 @@ const PeriodTracker: React.FC = () => {
 
   const token = localStorage.getItem("cyclesafe_token");
 
-  /* 📌 Submit Handler */
+  /*  Submit Handler */
   const handleChat = async () => {
     if (!agreePolicy) {
-      alert("⚠️ You must accept the data policy & consent first.");
+      alert(" You must accept the data policy & consent first.");
       return;
     }
 
@@ -145,7 +145,7 @@ const PeriodTracker: React.FC = () => {
               Receive SMS reminders for your next period & ovulation
             </label>
 
-            {/* 🔐 Consent Policy */}
+            {/*  Consent Policy */}
             <div className="policyBox">
               <label className="policyLabel">
                 <input
@@ -173,7 +173,7 @@ const PeriodTracker: React.FC = () => {
       {/* Error */}
       {error && (
         <div className="errorBox">
-          <p>⚠️ {error}</p>
+          <p> {error}</p>
         </div>
       )}
 
@@ -185,39 +185,31 @@ const PeriodTracker: React.FC = () => {
             Based on your input, here’s your personalized cycle prediction.
           </p>
 
+          {/* UPDATED: Icons kept, unnecessary icon wrapper removed */}
           <div className="cardContainer">
             <div className="resultCard">
-              <div className="icon">💧</div>
-              <div>
-                <p className="cardLabel">Next Period</p>
-                <p className="cardValue">
-                  {new Date(response.next_period).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </p>
-              </div>
+              <p className="cardLabel">💧 Next Period</p>
+              <p className="cardValue">
+                {new Date(response.next_period).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                })}
+              </p>
             </div>
 
             <div className="resultCard">
-              <div className="icon">🩸</div>
-              <div>
-                <p className="cardLabel">Ovulation</p>
-                <p className="cardValue">
-                  {new Date(response.ovulation).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </p>
-              </div>
+              <p className="cardLabel">🩸 Ovulation</p>
+              <p className="cardValue">
+                {new Date(response.ovulation).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                })}
+              </p>
             </div>
 
             <div className="resultCard">
-              <div className="icon">🌸</div>
-              <div>
-                <p className="cardLabel">Fertile Window</p>
-                <p className="cardValue">{response.fertile_window}</p>
-              </div>
+              <p className="cardLabel">🌸 Fertile Window</p>
+              <p className="cardValue">{response.fertile_window}</p>
             </div>
           </div>
 
