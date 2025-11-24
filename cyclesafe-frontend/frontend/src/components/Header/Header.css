@@ -231,3 +231,27 @@
     pointer-events: auto;
   }
 }
+
+/* ============================= */
+/*        BRAND LOGO STYLE       */
+/* ============================= */
+
+.cyclesafe-logo {
+  height: 52px;         /* Good desktop size */
+  width: auto;          /* Preserve aspect ratio */
+  object-fit: contain;
+  transition: transform 0.2s ease-in-out;
+  margin-left: 8px;
+}
+
+/* Hover animation */
+.brand-click:hover .cyclesafe-logo {
+  transform: scale(1.07);
+}
+
+/* Mobile logo size */
+@media (max-width: 576px) {
+  .cyclesafe-logo {
+    height: 44px;
+  }
+}

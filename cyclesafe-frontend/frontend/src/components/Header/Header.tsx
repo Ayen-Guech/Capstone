@@ -152,7 +152,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, onLoginClick }) => {
                   theme === "light" ? "light-mode" : "dark-mode"
                 }`}
               >
-                {theme === "light" ? " Dark" : " Light"}
+                {theme === "light" ? "Dark" : " Light"}
               </button>
             </Nav>
           </div>
