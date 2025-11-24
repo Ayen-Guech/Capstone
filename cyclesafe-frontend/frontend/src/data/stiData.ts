@@ -14,13 +14,7 @@ export const stiData: STIData[] = [
       "A viral infection that weakens the immune system. Regular testing, PrEP, and ART treatments are key to prevention and management.",
     moreInfo: "https://www.kff.org/global-health-policy/the-global-hiv-aids-epidemic/",
   },
-  {
-    id: 3,
-    name: "Gonorrhea",
-    description:
-      "A bacterial infection transmitted through sexual contact. Some strains are antibiotic resistant, so prompt treatment is vital.",
-    moreInfo: "https://www.nhs.uk/conditions/gonorrhoea/",
-  },
+
   {
     id: 4,
     name: "Syphilis",
@@ -28,13 +22,7 @@ export const stiData: STIData[] = [
       "A multi-stage bacterial infection that can cause severe health issues if untreated. Early detection ensures full recovery.",
     moreInfo: "https://www.cdc.gov/std/syphilis/stdfact-syphilis.htm",
   },
-  {
-    id: 5,
-    name: "HPV",
-    description:
-      "The most common viral STI. Certain strains can cause cancer — vaccination and regular screening are recommended.",
-    moreInfo: "https://youtu.be/sSp5JmzA1s0",
-  },
+ 
   {
     id: 6,
     name: "Herpes (HSV)",

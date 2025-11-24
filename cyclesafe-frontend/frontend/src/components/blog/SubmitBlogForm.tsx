@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import styles from "./SubmitBlogForm.module.css";
 
-// 🌍 Backend URL for BOTH Localhost & Vercel
+// Backend URL for BOTH Localhost & Vercel
 const VITE_BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
 
@@ -18,7 +18,7 @@ const SubmitBlogForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
-  // 📌 Handle text inputs
+  // Handle text inputs
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -33,7 +33,7 @@ const SubmitBlogForm: React.FC = () => {
     });
   };
 
-  // 🚀 Handle submit
+  //  Handle submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -53,7 +53,7 @@ const SubmitBlogForm: React.FC = () => {
         type: "success",
         text:
           res.data?.message ||
-          "🎉 Thank you! Your blog has been submitted and is now awaiting review by our team.",
+          " Thank you! Your blog has been submitted and is now awaiting review by our team.",
       });
 
       // Reset form
@@ -62,14 +62,14 @@ const SubmitBlogForm: React.FC = () => {
     } catch (error: any) {
       console.error(error);
 
-      let backendMsg = "⚠️ We couldn’t save your blog. Please check your details and try again.";
+      let backendMsg = " We couldn’t save your blog. Please check your details and try again.";
 
       // Show actual backend error if available
       if (error.response?.data) {
         backendMsg =
           typeof error.response.data === "string"
-            ? `⚠️ ${error.response.data}`
-            : `⚠️ ${JSON.stringify(error.response.data)}`;
+            ? ` ${error.response.data}`
+            : ` ${JSON.stringify(error.response.data)}`;
       }
 
       setMessage({ type: "error", text: backendMsg });
