@@ -13,7 +13,6 @@ const ContraceptionDashboard: React.FC = () => {
   const itemsPerPage = 6;
   const totalPages = Math.ceil(contraceptions.length / itemsPerPage);
 
-  // Get items for current page
   const indexOfLast = currentPage * itemsPerPage;
   const indexOfFirst = indexOfLast - itemsPerPage;
   const currentItems = contraceptions.slice(indexOfFirst, indexOfLast);
@@ -42,10 +41,7 @@ const ContraceptionDashboard: React.FC = () => {
   return (
     <Container className="py-5">
       {/* Heading */}
-      <h2
-        className="text-center mb-3"
-        style={{ color: "var(--heading-color)" }}
-      >
+      <h2 className="text-center mb-3" style={{ color: "var(--heading-color)" }}>
         Contraceptive Methods
       </h2>
 
@@ -74,7 +70,7 @@ const ContraceptionDashboard: React.FC = () => {
         ))}
       </Row>
 
-      {/* Pagination Controls */}
+      {/* Pagination */}
       <div className="text-center mt-3">
         <Button
           variant="secondary"
@@ -112,41 +108,51 @@ const ContraceptionDashboard: React.FC = () => {
         </div>
       )}
 
-      {/* Modal for Comparison */}
-      <Modal
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        size="lg"
-        centered
-      >
+      {/* Comparison Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title style={{ color: "var(--heading-color)" }}>
             Comparison Results
           </Modal.Title>
         </Modal.Header>
+
         <Modal.Body style={{ color: "var(--text-color)" }}>
           <Row>
             {compareList.map((item) => (
-              <Col md={6} key={item.id} className="mb-3">
+              <Col md={6} key={item.id} className="mb-4">
+
+                {/* Name */}
                 <h5 style={{ color: "var(--heading-color)" }}>{item.name}</h5>
-                <p>{item.description}</p>
-                <h6>Pros</h6>
+
+                {/* Description */}
+                <p style={{ fontWeight: "500" }}>{item.description}</p>
+
+                {/* Pros */}
+                <h6 className="mt-3">Pros</h6>
                 <ListGroup variant="flush">
                   {item.pros.map((pro, index) => (
                     <ListGroup.Item
                       key={index}
-                      style={{ backgroundColor: "var(--card-bg)", color: "var(--text-color)" }}
+                      style={{
+                        backgroundColor: "var(--card-bg)",
+                        color: "var(--text-color)",
+                      }}
                     >
                       {pro}
                     </ListGroup.Item>
                   ))}
                 </ListGroup>
+
+                {/* Cons */}
                 <h6 className="mt-3">Cons</h6>
                 <ListGroup variant="flush">
                   {item.cons.map((con, index) => (
                     <ListGroup.Item
                       key={index}
-                      style={{ backgroundColor: "var(--card-bg)", color: "var(--text-color)" }}
+                      style={{
+                        backgroundColor: "var(--card-bg)",
+                        color: "var(--text-color)",
+                      }}
                     >
                       {con}
                     </ListGroup.Item>

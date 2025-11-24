@@ -6,6 +6,9 @@ export interface ContraceptionType {
   moreInfo: string;
   pros: string[];
   cons: string[];
+  summary: string;
+  definitions: string[];
+  ethicalNote: string;
 }
 
 
