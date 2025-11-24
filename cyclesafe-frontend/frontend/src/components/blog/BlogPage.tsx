@@ -23,7 +23,7 @@ interface BlogPost {
 }
 
 // 🌍 Backend URL for BOTH Localhost & Vercel
-const BACKEND_URL =
+const VITE_BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
 
 const BlogPage: React.FC = () => {
@@ -38,7 +38,7 @@ const BlogPage: React.FC = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get(`${BACKEND_URL}api/blog/approved-posts/`);
+        const res = await axios.get(`${VITE_BACKEND_URL}api/blog/approved-posts/`);
         setBlogs(res.data.results || res.data);
       } catch (err) {
         console.error("Error fetching blogs:", err);
@@ -62,7 +62,7 @@ const BlogPage: React.FC = () => {
     );
 
     try {
-      await axios.post(`${BACKEND_URL}api/blog/${id}/like/`, {
+      await axios.post(`${VITE_BACKEND_URL}api/blog/${id}/like/`, {
         session_id: sessionId,
       });
     } catch (error) {
@@ -98,7 +98,7 @@ const BlogPage: React.FC = () => {
     );
 
     try {
-      await axios.post(`${BACKEND_URL}api/blog/comment/`, {
+      await axios.post(`${VITE_BACKEND_URL}api/blog/comment/`, {
         post: id,
         name: "Anonymous",
         comment_text: text,
@@ -113,7 +113,7 @@ const BlogPage: React.FC = () => {
   const fetchComments = async (id: number) => {
     try {
       const res = await axios.get(
-        `${BACKEND_URL}api/blog/approved-posts/${id}/`
+        `${VITE_BACKEND_URL}api/blog/approved-posts/${id}/`
       );
       setComments((prev) => ({ ...prev, [id]: res.data.comments || [] }));
     } catch (error) {
