@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./ChatPage.css";
 
-//  Use environment variable for backend (same as other pages)
+// Use environment variable for backend
 const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
 
@@ -13,13 +13,20 @@ const PeriodTracker: React.FC = () => {
   const [cycleLength, setCycleLength] = useState("");
   const [phone, setPhone] = useState("");
   const [allowSms, setAllowSms] = useState(false);
+  const [agreePolicy, setAgreePolicy] = useState(false);
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
   const token = localStorage.getItem("cyclesafe_token");
 
+  /* 📌 Submit Handler */
   const handleChat = async () => {
+    if (!agreePolicy) {
+      alert("⚠️ You must accept the data policy & consent first.");
+      return;
+    }
+
     if (!message.trim()) {
       alert("Please describe your period dates before submitting.");
       return;
@@ -35,7 +42,6 @@ const PeriodTracker: React.FC = () => {
     setError(null);
 
     try {
-      //  Use deployed backend endpoint dynamically
       const res = await axios.post(
         `${BACKEND_URL}api/tracker/chat/`,
         {
@@ -68,9 +74,7 @@ const PeriodTracker: React.FC = () => {
           )}`
         );
       } else if (error.request) {
-        setError(
-          "No response from backend. Please make sure your server is running."
-        );
+        setError("No response from backend. Please make sure your server is running.");
       } else {
         setError("Unexpected error: " + error.message);
       }
@@ -81,7 +85,7 @@ const PeriodTracker: React.FC = () => {
 
   return (
     <div className="page">
-      {/*  Hero Section */}
+      {/* Header Section */}
       <div className="headerSection">
         {/* Left Side */}
         <div className="infoCard">
@@ -105,7 +109,7 @@ const PeriodTracker: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Side */}
+        {/* Right Side Chat Card */}
         <div className="chatCard">
           <div className="chatBox">
             <textarea
@@ -140,10 +144,28 @@ const PeriodTracker: React.FC = () => {
                 checked={allowSms}
                 onChange={(e) => setAllowSms(e.target.checked)}
               />
-              Receive SMS reminders for your next period and ovulation
+              Receive SMS reminders for your next period & ovulation
             </label>
 
-            <button onClick={handleChat} disabled={loading} className="sendBtn">
+            {/* 🔐 Policy Agreement */}
+            <div className="policyBox">
+              <label className="policyLabel">
+                <input
+                  type="checkbox"
+                  checked={agreePolicy}
+                  onChange={(e) => setAgreePolicy(e.target.checked)}
+                />
+                I consent to share menstrual cycle information for AI-based
+                predictions. I understand CycleSafe is not a medical tool and
+                does not replace a doctor’s advice.
+              </label>
+            </div>
+
+            <button
+              onClick={handleChat}
+              disabled={loading || !agreePolicy}
+              className={`sendBtn ${!agreePolicy ? "disabledBtn" : ""}`}
+            >
               {loading ? "Analyzing..." : "Submit"}
             </button>
           </div>
@@ -151,6 +173,7 @@ const PeriodTracker: React.FC = () => {
       </div>
 
       {/* Error */}
+
       {error && (
         <div className="errorBox">
           <p>⚠️ {error}</p>

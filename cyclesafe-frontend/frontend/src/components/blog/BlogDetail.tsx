@@ -91,7 +91,7 @@ const BlogDetail: React.FC = () => {
       {/* === Like & Comment Row === */}
       <div className={styles.detailActions}>
         <button onClick={handleLike} className={styles.likeBtn}>
-          ❤️ {post.likes_count}
+           {post.likes_count}
         </button>
       </div>
 

@@ -1,0 +1,83 @@
+/* ========= Wrapper ========= */
+.policyWrapper {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.8;
+  text-align: center; /* 💎 CENTER ALL TEXT */
+}
+
+/* ========= Titles ========= */
+.title {
+  font-size: 38px;
+  font-weight: 700;
+  color: #9b0032;
+  margin-bottom: 10px;
+}
+
+/* ========= Effective Date ========= */
+.effective {
+  margin-bottom: 40px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* ========= Section Headers ========= */
+.sectionTitle {
+  font-size: 26px;
+  font-weight: 700;
+  color: #9b0032;
+  margin: 50px 0 15px;
+}
+
+/* ========= Paragraphs ========= */
+.textBlock {
+  font-size: 17px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* ========= Lists ========= */
+.list {
+  margin: 0 auto;
+  padding: 0;
+  list-style-position: inside; /* 💎 Align bullets nicely */
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.list li {
+  margin-bottom: 6px;
+}
+
+/* ========= Light Theme ========= */
+.light {
+  color: #6A0D25;
+}
+
+/* ========= Dark Theme ========= */
+.dark {
+  color: #FFE9E4;
+}
+
+.dark .sectionTitle,
+.dark .title {
+  color: #FFD2C5;
+}
+
+/* ========= Mobile Tweaks ========= */
+@media (max-width: 600px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .sectionTitle {
+    font-size: 22px;
+  }
+
+  .policyWrapper {
+    padding: 0 15px;
+    margin: 30px auto;
+  }
+}

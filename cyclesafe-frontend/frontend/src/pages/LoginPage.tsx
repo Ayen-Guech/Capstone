@@ -80,17 +80,23 @@ const LoginPage: React.FC = () => {
 
           <form onSubmit={handleSubmit}>
 
+            {/* USERNAME (NO SPACES) */}
             <div className="inputbox">
               <input
                 type="text"
                 required
                 placeholder=" "
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) =>
+                  setUsername(e.target.value.replace(/\s/g, ""))
+                }
               />
-              <label>Username</label>
+              <label>
+                Username <span className="no-space-hint">(no spaces)</span>
+              </label>
             </div>
 
+            {/* PASSWORD OR NEW PASSWORD */}
             <div className="inputbox">
               <input
                 type="password"

@@ -1,0 +1,127 @@
+.banner {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 16px 20px;
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.banner p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  max-width: 75%;
+}
+
+.banner a {
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.banner button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+/* 🌞 Light Theme */
+.bannerLight {
+  background: #fdecea; 
+  color: #6A0D25;
+}
+
+.bannerLight a {
+  color: #6A0D25;
+}
+
+.bannerLight button {
+  background: #E05A54;
+  color: #fff;
+}
+
+/* 🌙 Dark Theme */
+.bannerDark {
+  background: #6A0D25;
+  color: #ffe9e4;
+}
+
+.bannerDark a {
+  color: #ffd2c5;
+}
+
+.bannerDark button {
+  background: #ffe9e4;
+  color: #6A0D25;
+}
+
+.bannerDark button:hover {
+  background: #ffd0c2;
+}
+
+/* 📱 Responsive */
+@media (max-width: 600px) {
+  .banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .banner p {
+    max-width: 100%;
+  }
+}
+
+
+
+.btnGroup {
+  display: flex;
+  gap: 10px;
+}
+
+.acceptBtn, .rejectBtn {
+  padding: 6px 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Light */
+.bannerLight .acceptBtn {
+  background-color: #6A0D25;
+  color: #fff;
+}
+
+.bannerLight .rejectBtn {
+  background-color: transparent;
+  border: 1px solid #6A0D25;
+  color: #6A0D25;
+}
+
+/* Dark */
+.bannerDark .acceptBtn {
+  background-color: #FFD2C5;
+  color: #6A0D25;
+}
+
+.bannerDark .rejectBtn {
+  background-color: transparent;
+  border: 1px solid #FFD2C5;
+  color: #FFD2C5;
+}
+
+.rejectBtn:hover, .acceptBtn:hover {
+  opacity: 0.85;
+}
+

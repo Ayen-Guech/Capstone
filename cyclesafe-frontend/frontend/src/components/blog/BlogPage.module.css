@@ -466,3 +466,24 @@
     margin-top: 40px;
   }
 }
+
+
+/* 🔐 Community Rules Notice */
+.rulesNotice {
+  font-size: 14px;
+  margin-bottom: 6px;
+  text-align: center;
+  color: #9b0032;
+  font-weight: 600;
+}
+
+.rulesLink {
+  color: #E05A54;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.rulesLink:hover {
+  text-decoration: underline;
+  color: #6A0D25;
+}

@@ -331,3 +331,11 @@ body, html {
   display: none !important;
 }
 
+.no-space-hint {
+  font-size: 0.75em;
+  color: #ffd6e7;
+  margin-left: 3px;
+  opacity: 0.85;
+}
+
+

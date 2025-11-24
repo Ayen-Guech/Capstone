@@ -17,6 +17,11 @@ import ArticleDetail from "./pages/ArticleDetail";
 import BlogPage from "./components/blog/BlogPage";
 import BlogDetail from "./components/blog/BlogDetail";
 
+import PrivacyPolicy from "./pages/PrivacyPolicy";    // <-- ADDED
+import Settings from "./pages/Settings";
+import CommunityGuidelines from "./pages/CommunityGuidelines";             // <-- ADDED
+import ConsentBanner from "./components/ConsentBanner"; // <-- ADDED
+
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 const App: React.FC = () => {
@@ -48,7 +53,7 @@ const App: React.FC = () => {
       {/* Header */}
       <Header onNavigate={handleNavigate} />
 
-      {/* MAIN ROUTES */}
+      {/* ROUTES */}
       <Routes>
         {/* HOME sections */}
         <Route
@@ -68,7 +73,7 @@ const App: React.FC = () => {
           }
         />
 
-        {/* LOGIN PAGE (standalone) */}
+        {/* LOGIN PAGE */}
         <Route path="/login" element={<LoginPage />} />
 
         {/* Dashboards & content */}
@@ -83,9 +88,17 @@ const App: React.FC = () => {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
 
+        {/* NEW ROUTES (Footer Links) */}
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} /> {/* ADDED */}
+        <Route path="/community-guidelines" element={<CommunityGuidelines />} />           {/* ADDED */}
+        <Route path="/settings" element={<Settings />} />             {/* ADDED */}
+
         {/* REDIRECT unknown routes */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+
+      {/* Consent Banner (appears once) */}
+      <ConsentBanner /> {/* ADDED */}
 
       {/* Footer */}
       <Footer />

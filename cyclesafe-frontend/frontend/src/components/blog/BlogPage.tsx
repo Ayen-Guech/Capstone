@@ -50,7 +50,6 @@ const BlogPage: React.FC = () => {
     const sessionId = localStorage.getItem("sessionId") || Math.random().toString(36);
     localStorage.setItem("sessionId", sessionId);
 
-    //  Optimistic UI update
     setBlogs((prev) =>
       prev.map((blog) =>
         blog.id === id ? { ...blog, likes_count: blog.likes_count + 1 } : blog
@@ -76,23 +75,19 @@ const BlogPage: React.FC = () => {
       created_at: new Date().toISOString(),
     };
 
-    //  Optimistic local update
     setComments((prev) => ({
       ...prev,
       [id]: prev[id] ? [...prev[id], newComment] : [newComment],
     }));
 
-    // Clear input
     setCommentTexts((prev) => ({ ...prev, [id]: "" }));
 
-    // Update comment count immediately
     setBlogs((prev) =>
       prev.map((blog) =>
         blog.id === id ? { ...blog, comments_count: blog.comments_count + 1 } : blog
       )
     );
 
-    // Sync with backend
     try {
       await axios.post("http://localhost:8000/api/blog/comment/", {
         post: id,
@@ -100,7 +95,6 @@ const BlogPage: React.FC = () => {
         comment_text: text,
       });
 
-      // Optional: refresh from backend for accuracy
       fetchComments(id);
     } catch (error) {
       console.error("Error submitting comment:", error);
@@ -117,7 +111,7 @@ const BlogPage: React.FC = () => {
     }
   };
 
-  // ✅ Toggle comment visibility
+  // Toggle comment visibility
   const toggleComments = (id: number) => {
     setVisibleComments((prev) => {
       if (prev.includes(id)) {
@@ -133,30 +127,23 @@ const BlogPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {/*  Blog Welcome Header */}
+      {/* Blog Header */}
       <div className={styles.blogHeader}>
-        <h1>Welcome to the CycleSafe Community Blog </h1>
+        <h1>Welcome to the CycleSafe Community Blog</h1>
         <p>
-          Our blog is a safe and supportive space for women and girls to share stories,
-          health experiences, and insights that inspire collective growth. Through open
-          discussions on menstrual wellness, contraception, and reproductive health, we
-          aim to break taboos and build a community where knowledge empowers every woman.
-          Join the conversation. Your voice matters!
+          A safe space for women and girls to share stories, support each other,
+          and learn about reproductive health. Every voice matters.
         </p>
       </div>
 
-      {/* === MAIN CONTENT === */}
+      {/* MAIN CONTENT */}
       <div className={styles.mainContent}>
         {blogs.map((post) => (
           <div
             key={post.id}
-            className={`${styles.card} ${
-              visibleComments.includes(post.id) ? styles.expandedCard : ""
-            }`}
+            className={`${styles.card} ${visibleComments.includes(post.id) ? styles.expandedCard : ""}`}
           >
-            {post.image && (
-              <img src={post.image} alt={post.title} className={styles.image} />
-            )}
+            {post.image && <img src={post.image} alt={post.title} className={styles.image} />}
 
             <div className={styles.cardBody}>
               <h3 className={styles.title}>{post.title}</h3>
@@ -172,16 +159,19 @@ const BlogPage: React.FC = () => {
                 </button>
               </div>
 
-              {/* Comment input */}
+              {/* 🔐 Community Rules Notice */}
+              <div className={styles.rulesNotice}>
+                🛡 Community Rules Apply — 
+                <Link to="/community-guidelines" className={styles.rulesLink}> View Guidelines »</Link>
+              </div>
+
+              {/* Comment Input */}
               <div className={styles.commentContainer}>
                 <textarea
                   placeholder="Add a comment..."
                   value={commentTexts[post.id] || ""}
                   onChange={(e) =>
-                    setCommentTexts((prev) => ({
-                      ...prev,
-                      [post.id]: e.target.value,
-                    }))
+                    setCommentTexts((prev) => ({ ...prev, [post.id]: e.target.value }))
                   }
                   className={styles.commentBox}
                 />
@@ -194,7 +184,7 @@ const BlogPage: React.FC = () => {
                 </button>
               </div>
 
-              {/* Comment & Read More */}
+              {/* Actions */}
               <div className={styles.commentActionRow}>
                 <button onClick={() => toggleComments(post.id)} className={styles.commentBtn}>
                   💬 Comment ({post.comments_count})
@@ -233,7 +223,7 @@ const BlogPage: React.FC = () => {
         ))}
       </div>
 
-      {/* === SIDEBAR === */}
+      {/* SIDEBAR */}
       <div className={styles.sidebar}>
         <h3>Latest Blogs</h3>
         <ul>
@@ -248,7 +238,7 @@ const BlogPage: React.FC = () => {
         </ul>
       </div>
 
-      {/* === BLOG FORM === */}
+      {/* BLOG FORM */}
       <div className={styles.formWrapper}>
         <button onClick={() => setShowForm(!showForm)} className={styles.toggleButton}>
           {showForm ? "✖ Close Blog Form" : " Write a Blog"}

@@ -1,0 +1,175 @@
+.settingsWrapper {
+  max-width: 900px;
+  margin: 70px auto;
+  padding: 0 20px;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  line-height: 1.8;
+}
+
+/* ====== Titles ====== */
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #9b0032;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin-bottom: 35px;
+}
+
+/* ====== Cards ====== */
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+  padding: 25px 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #9b0032;
+  margin-bottom: 12px;
+}
+
+.text {
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+/* ====== Status & Feedback ====== */
+.status {
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+.feedback {
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #9b0032;
+}
+
+.note {
+  margin-top: 25px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* ====== Buttons ====== */
+.buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.primaryButton,
+.secondaryButton,
+.dangerButton {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.primaryButton {
+  background: #e05a54;
+  color: #fff;
+}
+
+.primaryButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(224, 90, 84, 0.4);
+}
+
+.secondaryButton {
+  background: #fdecea;
+  color: #9b0032;
+  border: 1px solid #f3b4ac;
+}
+
+.secondaryButton:hover {
+  background: #f8d2cb;
+}
+
+.dangerButton {
+  margin-top: 10px;
+  background: #9b0032;
+  color: #ffe9e4;
+}
+
+.dangerButton:hover {
+  background: #7a0226;
+  box-shadow: 0 3px 10px rgba(155, 0, 50, 0.4);
+}
+
+/* ====== Theme Support ====== */
+.light {
+  color: #6a0d25;
+}
+
+.light .card {
+  background: #fff6f3;
+}
+
+.dark {
+  color: #ffe9e4;
+}
+
+.dark .title,
+.dark .sectionTitle {
+  color: #ffd2c5;
+}
+
+.dark .card {
+  background: rgba(50, 0, 20, 0.9);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.dark .primaryButton {
+  background: #ffd2c5;
+  color: #6a0d25;
+}
+
+.dark .secondaryButton {
+  background: transparent;
+  border: 1px solid #ffd2c5;
+  color: #ffd2c5;
+}
+
+.dark .secondaryButton:hover {
+  background: rgba(255, 210, 197, 0.12);
+}
+
+.dark .dangerButton {
+  background: #e05a54;
+  color: #ffe9e4;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 600px) {
+  .settingsWrapper {
+    margin: 40px auto;
+    padding: 0 15px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .sectionTitle {
+    font-size: 19px;
+  }
+
+  .card {
+    padding: 20px 16px;
+  }
+}
