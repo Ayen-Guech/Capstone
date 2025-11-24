@@ -15,17 +15,17 @@ const SubmitBlogForm: React.FC = () => {
     image: null as File | null,
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
-  // Handle text inputs
+  // 📌 Handle text inputs
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle file input
+  // 📎 Handle file upload
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -33,28 +33,48 @@ const SubmitBlogForm: React.FC = () => {
     });
   };
 
-  // Handle form submission
+  // 🚀 Handle submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSuccessMessage("");
+    setLoading(true);
+    setMessage(null);
 
     const data = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
-      if (value) data.append(key, value as any);
+      if (value !== null) data.append(key, value as any);
     });
 
     try {
-      await axios.post(`${VITE_BACKEND_URL}api/blog/submit-post/`, data, {
+      const res = await axios.post(`${VITE_BACKEND_URL}api/blog/submit-post/`, data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      setSuccessMessage("🎉 Your blog has been submitted for review!");
+
+      setMessage({
+        type: "success",
+        text:
+          res.data?.message ||
+          "🎉 Thank you! Your blog has been submitted and is now awaiting review by our team.",
+      });
+
+      // Reset form
       setFormData({ name: "", email: "", title: "", content: "", image: null });
-    } catch (error) {
+
+    } catch (error: any) {
       console.error(error);
-      setSuccessMessage("❌ There was an error submitting your blog.");
+
+      let backendMsg = "⚠️ We couldn’t save your blog. Please check your details and try again.";
+
+      // Show actual backend error if available
+      if (error.response?.data) {
+        backendMsg =
+          typeof error.response.data === "string"
+            ? `⚠️ ${error.response.data}`
+            : `⚠️ ${JSON.stringify(error.response.data)}`;
+      }
+
+      setMessage({ type: "error", text: backendMsg });
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
@@ -62,8 +82,7 @@ const SubmitBlogForm: React.FC = () => {
     <div className={styles.container}>
       <h2>Share Your Story</h2>
       <p className={styles.subtitle}>
-        Share your knowledge, tips, or personal experience. Once approved by the
-        CycleSafe team, your story will appear in our blog section.
+        Share your experience or knowledge. After review, it will appear in our community blog.
       </p>
 
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -96,7 +115,7 @@ const SubmitBlogForm: React.FC = () => {
 
         <textarea
           name="content"
-          placeholder="Write your story here..."
+          placeholder="Write your story..."
           rows={6}
           value={formData.content}
           onChange={handleChange}
@@ -105,12 +124,18 @@ const SubmitBlogForm: React.FC = () => {
 
         <input type="file" name="image" accept="image/*" onChange={handleFileChange} />
 
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Submitting..." : "Submit Blog"}
+        <button type="submit" disabled={loading}>
+          {loading ? "Submitting..." : "Submit Blog"}
         </button>
 
-        {successMessage && (
-          <p className={styles.successMessage}>{successMessage}</p>
+        {message && (
+          <p
+            className={`${styles.responseMessage} ${
+              message.type === "success" ? styles.success : styles.error
+            }`}
+          >
+            {message.text}
+          </p>
         )}
       </form>
     </div>

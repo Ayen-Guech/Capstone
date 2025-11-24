@@ -54,3 +54,27 @@ h2 {
   border: 1px solid #7bd57b;
   color: #0f7a15;
 }
+
+.responseMessage {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+/* Soft success style */
+.success {
+  background: #e7ffe9;
+  border: 1px solid #7bd77d;
+  color: #0a6510;
+}
+
+/* Soft error style */
+.error {
+  background: #ffe9e9;
+  border: 1px solid #f09b9b;
+  color: #820000;
+}
