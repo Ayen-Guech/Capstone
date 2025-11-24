@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import styles from "./SubmitBlogForm.module.css";
 
+// 🌍 Backend URL for BOTH Localhost & Vercel
+const VITE_BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
+
 const SubmitBlogForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -14,13 +18,18 @@ const SubmitBlogForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Handle text inputs
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   // Handle file input
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, image: e.target.files ? e.target.files[0] : null });
+    setFormData({
+      ...formData,
+      image: e.target.files ? e.target.files[0] : null,
+    });
   };
 
   // Handle form submission
@@ -34,7 +43,7 @@ const SubmitBlogForm: React.FC = () => {
     });
 
     try {
-      await axios.post("http://localhost:8000/api/blog/submit-post/", data, {
+      await axios.post(`${VITE_BACKEND_URL}api/blog/submit-post/`, data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("Your blog has been submitted for review!");
@@ -51,8 +60,8 @@ const SubmitBlogForm: React.FC = () => {
     <div className={styles.container}>
       <h2>Share Your Story</h2>
       <p className={styles.subtitle}>
-        Share your knowledge, tips, or personal experience. Once approved by the CycleSafe team,
-        your story will appear in our blog section.
+        Share your knowledge, tips, or personal experience. Once approved by the
+        CycleSafe team, your story will appear in our blog section.
       </p>
 
       <form onSubmit={handleSubmit} className={styles.form}>
