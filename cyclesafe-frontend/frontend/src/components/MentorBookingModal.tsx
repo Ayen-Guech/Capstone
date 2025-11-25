@@ -8,8 +8,9 @@ interface MentorBookingModalProps {
   topic: string;
 }
 
-const BACKEND_BOOK_URL =
-  import.meta.env.VITE_BACKEND_SRH_BOOK || "http://127.0.0.1:8000/api/srh/book/";
+// 🌍 Base backend URL (shared for local + production)
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000";
 
 const MentorBookingModal: React.FC<MentorBookingModalProps> = ({
   show,
@@ -36,7 +37,7 @@ const MentorBookingModal: React.FC<MentorBookingModalProps> = ({
     setSuccess("");
 
     try {
-      const res = await fetch(BACKEND_BOOK_URL, {
+      const res = await fetch(`${API_BASE_URL}/api/srh/book/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -52,7 +53,9 @@ const MentorBookingModal: React.FC<MentorBookingModalProps> = ({
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Booking failed.");
 
-      setSuccess(data.message || "🎉 Your session has been booked successfully!");
+      setSuccess(
+        data.message || "🎉 Your session has been booked successfully!"
+      );
       setFirstName("");
       setLastName("");
       setDatetime("");
