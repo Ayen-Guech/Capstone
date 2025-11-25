@@ -22,7 +22,7 @@ interface BlogPost {
   comments_count: number;
 }
 
-// 🌍 Backend URL for BOTH Localhost & Vercel
+//  Backend URL for BOTH Localhost & Vercel
 const VITE_BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
 
@@ -34,7 +34,7 @@ const BlogPage: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // 📌 Fetch all approved blogs
+  //  Fetch all approved blogs
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -49,7 +49,7 @@ const BlogPage: React.FC = () => {
     fetchBlogs();
   }, []);
 
-  // ❤️ Like a blog (instant + sync)
+  //  Like a blog (instant + sync)
   const handleLike = async (id: number) => {
     const sessionId =
       localStorage.getItem("sessionId") || Math.random().toString(36);
@@ -109,7 +109,7 @@ const BlogPage: React.FC = () => {
     }
   };
 
-  // 🔎 Fetch comments for one blog
+  //  Fetch comments for one blog
   const fetchComments = async (id: number) => {
     try {
       const res = await axios.get(
@@ -177,7 +177,7 @@ const BlogPage: React.FC = () => {
                 </button>
               </div>
 
-              {/* 🔐 Rules Notice */}
+              {/*  Rules Notice */}
               <div className={styles.rulesNotice}>
                 🛡 Community Rules Apply —{" "}
                 <Link to="/community-guidelines" className={styles.rulesLink}>
@@ -203,7 +203,7 @@ const BlogPage: React.FC = () => {
                   className={styles.sendArrow}
                   title="Send comment"
                 >
-                  ➤
+                  
                 </button>
               </div>
 
