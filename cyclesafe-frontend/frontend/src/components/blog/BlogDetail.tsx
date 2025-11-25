@@ -21,9 +21,9 @@ interface BlogPost {
   comments?: Comment[];
 }
 
-// 🌍 Backend URL for both Localhost & Production
+// 🌍 Backend URL for both Localhost & Production (FIXED WITH SLASH)
 const API_BASE_URL =
-  import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000";
+  import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
 
 const BlogDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -37,7 +37,7 @@ const BlogDetail: React.FC = () => {
     const fetchPost = async () => {
       try {
         const res = await axios.get(
-          `${API_BASE_URL}/api/blog/approved-posts/${id}/`
+          `${API_BASE_URL}api/blog/approved-posts/${id}/`
         );
         setPost(res.data);
         setComments(res.data.comments || []);
@@ -59,12 +59,12 @@ const BlogDetail: React.FC = () => {
     localStorage.setItem("sessionId", sessionId);
 
     try {
-      await axios.post(`${API_BASE_URL}/api/blog/${id}/like/`, {
+      await axios.post(`${API_BASE_URL}api/blog/${id}/like/`, {
         session_id: sessionId,
       });
 
       const updated = await axios.get(
-        `${API_BASE_URL}/api/blog/approved-posts/${id}/`
+        `${API_BASE_URL}api/blog/approved-posts/${id}/`
       );
       setPost(updated.data);
     } catch (error) {
@@ -77,7 +77,7 @@ const BlogDetail: React.FC = () => {
     if (!commentText.trim() || !id) return;
 
     try {
-      await axios.post(`${API_BASE_URL}/api/blog/comment/`, {
+      await axios.post(`${API_BASE_URL}api/blog/comment/`, {
         post: id,
         name: "Anonymous",
         comment_text: commentText,
@@ -86,7 +86,7 @@ const BlogDetail: React.FC = () => {
       setCommentText("");
 
       const updated = await axios.get(
-        `${API_BASE_URL}/api/blog/approved-posts/${id}/`
+        `${API_BASE_URL}api/blog/approved-posts/${id}/`
       );
       setComments(updated.data.comments || []);
       setPost(updated.data);
@@ -134,7 +134,9 @@ const BlogDetail: React.FC = () => {
 
       {/* === Comments list === */}
       <div className={styles.commentList}>
-        <h4 className={styles.commentHeader}>💬 Comments ({comments.length})</h4>
+        <h4 className={styles.commentHeader}>
+          💬 Comments ({comments.length})
+        </h4>
 
         {comments.length ? (
           comments.map((c) => (
