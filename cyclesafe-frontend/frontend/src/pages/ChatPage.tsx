@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./ChatPage.css";
 
-// Environment variable for backend
 const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000/";
 
@@ -18,26 +17,26 @@ const PeriodTracker: React.FC = () => {
 
   const token = localStorage.getItem("cyclesafe_token");
 
-  /*  Submit Handler */
   const handleChat = async () => {
+    setError(null);
+
     if (!agreePolicy) {
-      alert(" You must accept the data policy & consent first.");
+      setError("You must accept the data policy & consent first.");
       return;
     }
 
     if (!message.trim()) {
-      alert("Please describe your period dates before submitting.");
+      setError("Please describe your period dates before submitting.");
       return;
     }
 
     if (!token) {
-      alert("Please log in first.");
+      setError("Please log in first.");
       window.location.href = "/login";
       return;
     }
 
     setLoading(true);
-    setError(null);
 
     try {
       const res = await axios.post(
@@ -60,7 +59,7 @@ const PeriodTracker: React.FC = () => {
     } catch (error: any) {
       if (error.response) {
         if (error.response.status === 401) {
-          alert("Session expired. Please log in again.");
+          setError("Session expired. Please log in again.");
           localStorage.removeItem("cyclesafe_token");
           window.location.href = "/login";
           return;
@@ -84,7 +83,6 @@ const PeriodTracker: React.FC = () => {
     <div className="page">
       {/* Header Section */}
       <div className="headerSection">
-        {/* LEFT SIDE */}
         <div className="infoCard">
           <h1 className="mainTitle">Welcome to Your Period Tracker</h1>
           <p className="subText">
@@ -94,13 +92,10 @@ const PeriodTracker: React.FC = () => {
           <div className="chatIntro">
             <p>
               Monitoring your menstrual cycle is more than simply tracking
-              dates. It is about understanding your health. Your cycle reflects
-              your hormones, emotions, and overall wellbeing.
+              dates. It is about understanding your health.
             </p>
             <p>
-              With <strong>CycleSafe</strong>, you receive AI-powered
-              predictions, helpful reminders, and personalized insights that
-              empower you every month.
+              With <strong>CycleSafe</strong>, you receive AI-powered predictions and personalized insights.
             </p>
           </div>
         </div>
@@ -132,8 +127,6 @@ const PeriodTracker: React.FC = () => {
               placeholder="Enter your phone number (optional, e.g. +2507...)"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              inputMode="numeric"
-              pattern="[0-9+]*"
             />
 
             <label className="smsLabel">
@@ -142,10 +135,9 @@ const PeriodTracker: React.FC = () => {
                 checked={allowSms}
                 onChange={(e) => setAllowSms(e.target.checked)}
               />
-              Receive SMS reminders for your next period & ovulation
+              Receive SMS reminders
             </label>
 
-            {/*  Consent Policy */}
             <div className="policyBox">
               <label className="policyLabel">
                 <input
@@ -153,9 +145,7 @@ const PeriodTracker: React.FC = () => {
                   checked={agreePolicy}
                   onChange={(e) => setAgreePolicy(e.target.checked)}
                 />
-                I consent to share menstrual cycle information for AI-based predictions.
-                I understand CycleSafe is not a medical tool and does not replace
-                a doctor’s advice.
+                I consent to share menstrual cycle information for AI predictions.
               </label>
             </div>
 
@@ -170,10 +160,10 @@ const PeriodTracker: React.FC = () => {
         </div>
       </div>
 
-      {/* Error */}
+      {/* Error Box */}
       {error && (
         <div className="errorBox">
-          <p> {error}</p>
+          <p>{error}</p>
         </div>
       )}
 
@@ -181,29 +171,20 @@ const PeriodTracker: React.FC = () => {
       {response && (
         <div className="resultsSection">
           <h3 className="resultHeader">Your Cycle Overview</h3>
-          <p className="resultSub">
-            Based on your input, here’s your personalized cycle prediction.
-          </p>
+          <p className="resultSub">Here’s your personalized cycle prediction.</p>
 
-          {/* UPDATED: Icons kept, unnecessary icon wrapper removed */}
           <div className="cardContainer">
             <div className="resultCard">
               <p className="cardLabel">💧 Next Period</p>
               <p className="cardValue">
-                {new Date(response.next_period).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                })}
+                {new Date(response.next_period).toLocaleDateString("en-US")}
               </p>
             </div>
 
             <div className="resultCard">
               <p className="cardLabel">🩸 Ovulation</p>
               <p className="cardValue">
-                {new Date(response.ovulation).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                })}
+                {new Date(response.ovulation).toLocaleDateString("en-US")}
               </p>
             </div>
 
